@@ -1,0 +1,4 @@
+[user]
+	email = api@cs.berkeley.edu
+[credential]
+	helper = osxkeychain
