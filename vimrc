@@ -39,7 +39,9 @@
 
         " File search
         Bundle 'scrooloose/nerdtree'
-        
+
+        Bundle 'Lokaltog/vim-easymotion'
+
         " Latex
         Bundle 'LaTeX-Box-Team/LaTeX-Box'
     
@@ -64,6 +66,7 @@
     set shiftwidth=4            " 4 indents for tab
     set expandtab               " Use space instead of tabs
     set tabstop=4               " 4 column indents.
+    set softtabstop=4
 
 " }
 
