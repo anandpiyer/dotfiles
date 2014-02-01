@@ -1,22 +1,48 @@
+" Platform {
+    silent function! WINDOWS()
+        return (has('win32') || has('win64'))
+    endfunction
+    silent function! OSX()
+        return has('macunix')
+    endfunction
+    silent function! LINUX()
+        return has('unix') && !has('macunix') && !has('win32unix')
+    endfunction
+
+    if WINDOWS()
+        set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME
+    endif
+" }
+
 " Vundle {
+"
     set nocompatible
     filetype on
     filetype off
 
-    if has('win32') || has('win64')
-        set rtp+=~/vimfiles/bundle/vundle/
-        call vundle#rc('$HOME/vimfiles/bundle/')
-    else
-        set rtp+=~/.vim/bundle/vundle/
-        call vundle#rc()
-    endif
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#rc()
 
     " Bundles {
+  
         Bundle 'gmarik/vundle'
+        
+        " Status line
         Bundle 'bling/vim-airline'
+        
+        " Color scheme/themes
         Bundle 'altercation/vim-colors-solarized'
         Bundle 'flazz/vim-colorschemes'
+        
+        " Fuzzy search
+        Bundle 'kien/ctrlp.vim'
+
+        " File search
+        Bundle 'scrooloose/nerdtree'
+        
+        " Latex
         Bundle 'LaTeX-Box-Team/LaTeX-Box'
+    
     " }
 
     filetype plugin indent on
@@ -52,9 +78,6 @@
 " Vim UI {
 
     let color_file="~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"
-    if has('win32') || has('win64')
-        let color_file="~/vimfiles/bundle/vim-colors-solarized/colors/solarized.vim"
-    endif
 
     if filereadable(expand(color_file))
         let g:solarized_termcolors=256
@@ -83,7 +106,7 @@
 " GUI Settings {
 
     if has('gui_running')
-        if has('win32') || has('win64')
+        if WINDOWS()
             set lines=20
             set guifont=Consolas:h10
         else
