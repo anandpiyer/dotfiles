@@ -83,7 +83,9 @@
     let color_file="~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"
 
     if filereadable(expand(color_file))
-        let g:solarized_termcolors=256
+        if has('gui_running')
+            let g:solarized_termcolors=256
+        endif
         let g:solarized_termtrans=1
         let g:solarized_contrast="normal"
         let g:solarized_visibility="normal"
