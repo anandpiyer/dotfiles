@@ -1,3 +1,8 @@
+#########################################################################################
+# Slate configuration.
+# https://github.com/jigish/slate
+# #######################################################################################
+
 # Configs
 config defaultToCurrentScreen true
 config nudgePercentOf screenSize
