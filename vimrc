@@ -20,32 +20,34 @@
     filetype on
     filetype off
 
-    set rtp+=~/.vim/bundle/vundle/
-    call vundle#rc()
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
 
     " Bundles {
   
-        Bundle 'gmarik/vundle'
+        Plugin 'gmarik/vundle'
         
         " Status line
-        Bundle 'bling/vim-airline'
+        Plugin 'bling/vim-airline'
         
         " Color scheme/themes
-        Bundle 'altercation/vim-colors-solarized'
-        Bundle 'flazz/vim-colorschemes'
+        Plugin 'altercation/vim-colors-solarized'
+        Plugin 'flazz/vim-colorschemes'
         
         " Fuzzy search
-        Bundle 'kien/ctrlp.vim'
+        Plugin 'kien/ctrlp.vim'
 
         " File search
-        Bundle 'scrooloose/nerdtree'
+        Plugin 'scrooloose/nerdtree'
 
-        Bundle 'Lokaltog/vim-easymotion'
+        Plugin 'Lokaltog/vim-easymotion'
 
         " Latex
-        Bundle 'LaTeX-Box-Team/LaTeX-Box'
+        Plugin 'LaTeX-Box-Team/LaTeX-Box'
     
     " }
+
+    call vundle#end()
 
     filetype plugin indent on
     " Brief help

@@ -37,7 +37,7 @@ bind g:cmd grid
 bind return:cmd;shift ${full}
 bind l:cmd;shift ${righthalf}
 bind h:cmd;shift ${lefthalf}
-bind p:cmd;shift ${topright}
+# bind p:cmd;shift ${topright}
 bind s:cmd;shift layout school
 
 # Resize bindings
