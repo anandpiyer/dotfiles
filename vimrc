@@ -17,6 +17,7 @@ Plug 'flazz/vim-colorschemes'
 Plug 'freeo/vim-kalisi'
 Plug 'morhetz/gruvbox'
 " Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-vinegar'
 Plug 'ctrlpvim/ctrlp.vim', { 'on':  'CtrlP' }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Lokaltog/vim-easymotion'
@@ -50,7 +51,7 @@ set shiftwidth=4                " 4 indents for tabs.
 set expandtab                   " Expand tabs to spaces.
 set tabstop=4                   " 4 column indents.
 set softtabstop=4               " Insert mode tab and backspace use 4 spaces.
-"set clipboard=unnamed           " Yank and paste with system clipboard.
+set clipboard+=unnamed          " Yank and paste with system clipboard.
 set laststatus=2                " Show status line.
 set wildmenu                    " Wildcard searches.
 
