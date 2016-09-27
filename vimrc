@@ -61,20 +61,20 @@ if has('gui_running')
     set guifont=Input:h13
 endif
 
-if has("nvim")
-    set termguicolors	" Doesn't work with Terminal.app.
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
+let g:gruvbox_contrast_light='hard'
+set background=light
+colorscheme gruvbox
+"color solarized
 
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod=':t'
 let g:airline_powerline_fonts=1
 
-let g:gruvbox_contrast_light='hard'
-let g:airline#extensions#tmuxline#enabled = 0
-let g:tmuxline_theme = 'zenburn'
-colorscheme gruvbox
-"color solarized
+if has('nvim')
+    set termguicolors	" Doesn't work with Terminal.app.
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    let g:airline#extensions#tmuxline#enabled=0
+endif
 
 ino jk <esc>
 cno jk <esc>
