@@ -54,6 +54,8 @@ set softtabstop=4               " Insert mode tab and backspace use 4 spaces.
 set clipboard+=unnamed          " Yank and paste with system clipboard.
 set laststatus=2                " Show status line.
 set wildmenu                    " Wildcard searches.
+set complete-=i                 " Ignore included files in complete.
+set smarttab                    " Use smarttabs. 
 
 if has('gui_running')
     set lines=40
