@@ -1,3 +1,5 @@
+export PATH="/usr/local/sbin:$PATH"
+export EDITOR="/usr/local/bin/nvim"
 #------------------------------------------------------------------------------
 # Colors
 #------------------------------------------------------------------------------
@@ -39,3 +41,4 @@ bindkey '^Z' fancy-ctrl-z
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
