@@ -18,6 +18,30 @@ zstyle ':completion:*' list-colors ''
 
 autoload -U promptinit && promptinit
 
+#------------------------------------------------------------------------------
+# History
+#------------------------------------------------------------------------------
+if [ -z $HISTFILE ]; then
+    HISTFILE=$HOME/.zsh_history
+fi
+HISTSIZE=10000
+SAVEHIST=10000
+
+setopt append_history
+setopt inc_append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_verify
+setopt share_history
+
+#------------------------------------------------------------------------------
+# Prompt
+#------------------------------------------------------------------------------
+autoload -U promptinit && promptinit
+prompt pure
+
 # http://zanshin.net/2013/02/02/zsh-configuration-from-the-ground-up/
 # http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 # https://github.com/myfreeweb/dotfiles/blob/master/zsh/zshrc
