@@ -29,6 +29,25 @@ f18 = hs.hotkey.bind({}, 'F18', pressedF18, releasedF18)
 -------------------------------------------------------------------------------
 hs.window.animationDuration = 0
 
+local window = require "hs.window"
+
+local grid = require "hs.grid"
+grid.MARGINX = 0
+grid.MARGINY = 0
+local gw = grid.GRIDWIDTH
+local gh = grid.GRIDHEIGHT
+
+local setCellForWindow = function(cell)
+    return function()
+        local win = window.focusedWindow()
+        if win then
+            grid.set(win, cell)
+        else
+            alert.show("Please select a window!")
+        end
+    end 
+end
+
 positionWindow = function(x, y, w, h)
     return function()
         local win = hs.window.focusedWindow()
@@ -54,19 +73,31 @@ moveWindow = function(x, y)
     end
 end
 
+local leftHalf = {x=0,y=0,w=gw/2,h=gh}
+local rightHalf = {x=gw/2,y=0,w=gw/2,h=gh}
+local topHalf = {x=0,y=0,w=gw,h=gw/2}
+local bottomHalf = {x=0,y=gh/2,w=gw,h=gw/2}
+local topLeft = {x=0,y=0,w=gw/2,h=gh/2}
+local topRight = {x=gw/2,y=0,w=gw/2,h=gh/2}
+local bottomLeft = {x=0,y=gh/2,w=gw/2,h=gh/2}
+local bottomRight = {x=gw/2,y=gh/2,w=gw/2,h=gh/2}
+
 keysWindowFunctions = {
-    {'f', positionWindow(0,0,1,1)},     -- Hyper+F Full screen
-    {'h', positionWindow(0,0,0.5,1)},   -- Hyper+H Left 50%
-    {'l', positionWindow(0.5,0,0.5,1)}, -- Hyper+L Right 50%
-    {'j', positionWindow(0,0.5,1,0.5)}, -- Hyper+J Bottom 50%
-    {'k', positionWindow(0,0,1,0.5)},    -- Hyper+K Top 50%
-    {'left', moveWindow(-10,0,0,0)},
-    {'right', moveWindow(10,0)},
-    {'up', moveWindow(0,-10)},
-    {'down', moveWindow(0,10)}
+    {'f', grid.maximizeWindow},
+    {'h', setCellForWindow(leftHalf)},
+    {'l', setCellForWindow(rightHalf)},
+    {'j', setCellForWindow(bottomHalf)},
+    {'k', setCellForWindow(topHalf)},
+    {'left', moveWindow(-10,0)},        -- Hyper+left Move window left
+    {'right', moveWindow(10,0)},        -- Hyper+right Move window right
+    {'up', moveWindow(0,-10)},          -- Hyper+up Move window up
+    {'down', moveWindow(0,10)},         -- Hyper+down Move window down
+    {'1', setCellForWindow(topLeft)},
+    {'2', setCellForWindow(topRight)},
+    {'3', setCellForWindow(bottomLeft)},
+    {'4', setCellForWindow(bottomRight)}
 }
 
-for iter,kv in ipairs(keysWindowFunctions) do
+for i,kv in ipairs(keysWindowFunctions) do
     k:bind({}, kv[1], function() kv[2](); k.triggered=true; end)
 end
-

@@ -16,9 +16,12 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'flazz/vim-colorschemes'
 Plug 'freeo/vim-kalisi'
 Plug 'morhetz/gruvbox'
+Plug 'junegunn/seoul256.vim'
 " Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-vinegar'
-Plug 'ctrlpvim/ctrlp.vim', { 'on':  'CtrlP' }
+"Plug 'ctrlpvim/ctrlp.vim', { 'on':  'CtrlP' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': '.install --all' }
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Lokaltog/vim-easymotion'
 Plug 'LaTeX-Box-Team/LaTeX-Box'
@@ -86,4 +89,7 @@ vno v <esc>
 nnoremap <C-s> :w<cr>
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
-
+nnoremap <Up> <nop>
+nnoremap <Down> <nop>
+nnoremap <Left> <nop>
+nnoremap <Right> <nop>
