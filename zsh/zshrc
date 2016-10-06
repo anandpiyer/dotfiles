@@ -16,8 +16,6 @@ setopt complete_in_word
 
 zstyle ':completion:*' list-colors ''
 
-autoload -U promptinit && promptinit
-
 #------------------------------------------------------------------------------
 # History
 #------------------------------------------------------------------------------

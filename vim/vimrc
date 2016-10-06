@@ -83,10 +83,14 @@ endif
 
 let g:is_posix=1
 
+let mapleader="\<Space>"
+nnoremap <leader>s :w<cr>
+inoremap <leader>s <C-c>:w<cr>
+
 ino jk <esc>
 cno jk <esc>
 vno v <esc>
-nnoremap <C-s> :w<cr>
+
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
 nnoremap <Up> <nop>
