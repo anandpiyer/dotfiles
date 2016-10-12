@@ -1,37 +1,16 @@
---[[
-Hyper key mode. 
-https://github.com/lodestone/hyper-hacks/
-https://gist.github.com/ttscoff/cce98a711b5476166792d5e6f1ac5907
---]]
--- A global variable for the Hyper mode.
-k = hs.hotkey.modal.new({}, "F17")
+local hotkey = require "hs.hotkey"
+local alert = require "hs.alert"
 
--- Enter Hyper Mode when F18 (Hyper/Capslock) is pressed
-pressedF18 = function()
-  k.triggered = false
-  k:enter()
-end
+hyper = {"cmd", "alt", "ctrl", "shift"}
 
--- Leave Hyper Mode when F18 (Hyper/Capslock) is pressed,
---   send ESCAPE if no other keys are pressed.
-releasedF18 = function()
-  k:exit()
-  if not k.triggered then
-    hs.eventtap.keyStroke({}, 'ESCAPE')
-  end
-end
-
--- Bind the Hyper key
-f18 = hs.hotkey.bind({}, 'F18', pressedF18, releasedF18)
-
--------------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 -- Window Management 
--------------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------
 hs.window.animationDuration = 0
 
 local window = require "hs.window"
-
 local grid = require "hs.grid"
+
 grid.MARGINX = 0
 grid.MARGINY = 0
 local gw = grid.GRIDWIDTH
@@ -99,5 +78,59 @@ keysWindowFunctions = {
 }
 
 for i,kv in ipairs(keysWindowFunctions) do
-    k:bind({}, kv[1], function() kv[2](); k.triggered=true; end)
+--    k:bind({}, kv[1], function() kv[2](); k.triggered=true; end)
+   hs.hotkey.bind(hyper, kv[1], function() kv[2](); end) 
 end
+
+switcher = hs.window.switcher.new() 
+hs.hotkey.bind(hyper,'tab',nil,function()switcher:next()end,nil,function()switcher:next()end)
+
+-- ----------------------------------------------------------------------------
+-- Application Management
+-- ----------------------------------------------------------------------------
+local application = require "hs.application"
+
+a = hs.hotkey.modal.new({}, "F16")
+
+launch = function(appName)
+    local app = application.get(appName) 
+    if not app then 
+        alert.show(appName .. " is not active!") 
+        return 
+    end
+    application.launchOrFocus(app:name()) 
+    app:activate(true) 
+end
+
+keysApps = {
+    {'i', "iTerm2"},
+    {'s', "Safari"},
+    {'m', "Airmail"},
+    {'f', "Finder"}
+}
+
+for i, app in ipairs(keysApps) do
+  a:bind({}, app[1], function() launch(app[2]); a:exit(); end)
+end
+
+pressedA = function() a:enter() end
+releasedA = function() end
+hs.hotkey.bind(hyper, 'a', nil, pressedA, releasedA)
+
+-- ----------------------------------------------------------------------------
+-- Reload config automatically upon change.
+-- ----------------------------------------------------------------------------
+function reloadConfig(files)
+    doReload = false
+    for _,file in pairs(files) do
+        if file:sub(-4) == ".lua" then
+            doReload = true
+        end
+    end
+    if doReload then
+        hs.reload()
+    end
+end
+local myWatcher = hs.pathwatcher.new("/Users/api/dotfiles/hammerspoon/", reloadConfig):start()
+hs.alert.show("Config loaded")
+

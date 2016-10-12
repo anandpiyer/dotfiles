@@ -19,23 +19,24 @@ Plug 'morhetz/gruvbox'
 Plug 'junegunn/seoul256.vim'
 " Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-vinegar'
-"Plug 'ctrlpvim/ctrlp.vim', { 'on':  'CtrlP' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': '.install --all' }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'Lokaltog/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
-"Plug 'Valloric/YouCompleteMe'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'jaxbot/semantic-highlight.vim', { 'on': 'SemanticHighlight' }
 Plug 'edkolev/tmuxline.vim'
 "Plug 'edkolev/promptline.vim'
 Plug 'myusuf3/numbers.vim'
 Plug 'tpope/vim-obsession'
+Plug 'hecal3/vim-leader-guide'
 
 call plug#end()
 
+filetype plugin indent on     
 syntax enable
 
 set autoindent                  " Indentation level for next line.
@@ -59,6 +60,37 @@ set laststatus=2                " Show status line.
 set wildmenu                    " Wildcard searches.
 set complete-=i                 " Ignore included files in complete.
 set smarttab                    " Use smarttabs. 
+set nobackup                    " No need for backups.
+set nowb                        " No autobackup.
+set noswapfile                  " No swap.
+
+let g:is_posix=1
+let g:deoplete#enable_at_startup = 1
+
+"------------------------------------------------------------------------------
+" Key remaps
+"------------------------------------------------------------------------------
+let mapleader="\<Space>"
+
+nnoremap <leader>s :w<cr>
+inoremap <leader>s <C-c>:w<cr>
+
+ino fd <esc>
+cno fd <esc>
+vno v <esc>
+
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+nnoremap <Up> <nop>
+nnoremap <Down> <nop>
+nnoremap <Left> <nop>
+nnoremap <Right> <nop>
+
+" Configure leader guide.
+let g:lmap = {}
+call leaderGuide#register_prefix_descriptions("<Space>", "g:lmap")
+nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
+vnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
 
 if has('gui_running')
     set lines=40
@@ -69,7 +101,6 @@ endif
 let g:gruvbox_contrast_light='hard'
 set background=light
 colorscheme gruvbox
-"color solarized
 
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod=':t'
@@ -80,20 +111,3 @@ if has('nvim')
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
     let g:airline#extensions#tmuxline#enabled=0
 endif
-
-let g:is_posix=1
-
-let mapleader="\<Space>"
-nnoremap <leader>s :w<cr>
-inoremap <leader>s <C-c>:w<cr>
-
-ino jk <esc>
-cno jk <esc>
-vno v <esc>
-
-nnoremap <Tab> :bnext<CR>
-nnoremap <S-Tab> :bprevious<CR>
-nnoremap <Up> <nop>
-nnoremap <Down> <nop>
-nnoremap <Left> <nop>
-nnoremap <Right> <nop>
