@@ -13,35 +13,15 @@
 (unless (server-running-p)
   (server-start))
 
-;;;; UI
-;; Don't show the ugly tool bar and scroll bar. Also avoid
-;; the menu bar if not in GUI mode.
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
-(unless (display-graphic-p)
-  (menu-bar-mode -1))
-
-;; turn off annoying splash screen and message
-(setq inhibit-splash-screen t
-      inhibit-startup-echo-area-message t
-      inhibit-startup-message t)
-
-;; better scrolling
-(setq scroll-conservatively 9999
-      scroll-preserve-screen-position t
-      scroll-margin 3)
-
-;; enable y/n answers
-(defalias 'yes-or-no-p 'y-or-n-p)
-
 ;; prefer utf-8
 (setq locale-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
+
+;; setup temporary directory
+(setq temporary-file-directory (concat user-emacs-directory "tmp"))
 
 ;; backup
 (setq backup-directory-alist
@@ -66,18 +46,6 @@
 ;(require 'desktop)
 ;(desktop-save-mode t)
 ;(setq desktop-auto-save-timeout 60)
-
-(global-linum-mode t)
-(global-hl-line-mode t)
-
-(setq column-number-mode t)
-(setq-default indent-tabs-mode nil)
-
-(use-package which-key
-  :config
-  (setq which-key-idle-delay 0.5)
-  (setq which-key-min-display-lines 3)
-  (which-key-mode t))
 
 (provide 'init-core)
 

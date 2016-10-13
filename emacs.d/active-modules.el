@@ -1,0 +1,6 @@
+(require 'setup-evil)
+(require 'setup-ido)
+(require 'setup-company)
+(require 'setup-flycheck)
+(require 'setup-tex)
+(require 'setup-ensime)

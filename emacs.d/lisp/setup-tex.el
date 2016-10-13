@@ -1,4 +1,4 @@
-;;; init-tex.el --- latex configuration
+;;; setup-tex.el --- latex configuration
 ;;; commentary:
 ;;; code:
 (setenv "PATH"
@@ -40,6 +40,6 @@
     :config
     (auctex-latexmk-setup))
 
-(provide 'init-tex)
+(provide 'setup-tex)
 
-;;; init-tex.el ends here
+;;; setup-tex.el ends here
