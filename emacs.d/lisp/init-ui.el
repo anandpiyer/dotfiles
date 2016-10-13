@@ -1,4 +1,4 @@
-;;; init-ui.el --- UI related settings
+;;; Init-ui.el --- UI related settings
 ;;; Commentary:
 ;;; Code:
 
@@ -24,7 +24,17 @@
 ;; enable y/n answers
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(global-linum-mode t)
+;; hybrid relative line number
+(use-package nlinum
+  :config
+  (global-nlinum-mode t)
+
+  (use-package nlinum-relative
+    :config
+    (nlinum-relative-setup-evil)
+    (setq nlinum-relative-redisplay-delay 0)
+    (add-hook 'prog-mode-hook 'nlinum-relative-mode)))
+
 (global-hl-line-mode t)
 (show-paren-mode)
 (line-number-mode t)

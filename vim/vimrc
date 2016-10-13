@@ -72,8 +72,8 @@ let g:deoplete#enable_at_startup = 1
 "------------------------------------------------------------------------------
 let mapleader="\<Space>"
 
-nnoremap <leader>s :w<cr>
-inoremap <leader>s <C-c>:w<cr>
+nnoremap <leader>w :w<cr>
+inoremap <leader>w <C-c>:w<cr>
 
 ino fd <esc>
 cno fd <esc>
