@@ -34,6 +34,7 @@
 
 (require 'init-core)
 (require 'init-ui)
+(require 'init-editor)
 
 (if (file-exists-p active-modules-file)
     (load active-modules-file))

@@ -43,9 +43,9 @@
 (recentf-mode t)
 
 ;; save sessions
-;(require 'desktop)
-;(desktop-save-mode t)
-;(setq desktop-auto-save-timeout 60)
+(require 'desktop)
+(desktop-save-mode t)
+(setq desktop-auto-save-timeout 60)
 
 (provide 'init-core)
 

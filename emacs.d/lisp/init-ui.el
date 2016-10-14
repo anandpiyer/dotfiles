@@ -24,36 +24,8 @@
 ;; enable y/n answers
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; hybrid relative line number
-(use-package nlinum
-  :config
-  (global-nlinum-mode t)
-
-  (use-package nlinum-relative
-    :config
-    (nlinum-relative-setup-evil)
-    (setq nlinum-relative-redisplay-delay 0)
-    (add-hook 'prog-mode-hook 'nlinum-relative-mode)))
-
-(global-hl-line-mode t)
-(show-paren-mode)
-(line-number-mode t)
-(column-number-mode t)
 (display-time-mode t)
 (size-indication-mode t)
-
-(setq show-paren-delay 0)
-(setq column-number-mode t)
-
-; use spaces instead of tabs
-(setq-default indent-tabs-mode nil
-              tab-width 4)
-
-; use a single spaces at sentence ending
-(setq sentence-end-double-space nil)
-
-; delete selections with keypress
-(delete-selection-mode t)
 
 (use-package which-key
   :config

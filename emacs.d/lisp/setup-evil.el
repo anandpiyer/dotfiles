@@ -14,7 +14,8 @@
       "e" 'find-file
       "b" 'switch-to-buffer
       "d" 'kill-this-buffer
-      "q" 'quit-window)))
+      "q" 'quit-window
+      "r" 'evil-fill-and-move)))
     
 (provide 'setup-evil)
 ;;; setup-evil.el ends here
