@@ -106,7 +106,8 @@ keysApps = {
     {'i', "iTerm2"},
     {'s', "Safari"},
     {'m', "Airmail"},
-    {'f', "Finder"}
+    {'f', "Finder"},
+    {'e', "Emacs"}
 }
 
 for i, app in ipairs(keysApps) do

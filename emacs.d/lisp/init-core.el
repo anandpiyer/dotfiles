@@ -8,11 +8,6 @@
 (add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
 (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
 
-;; start emacs server if not started.
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-
 ;; prefer utf-8
 (setq locale-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)

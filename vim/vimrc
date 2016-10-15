@@ -87,8 +87,8 @@ nnoremap <Down> <nop>
 nnoremap <Left> <nop>
 nnoremap <Right> <nop>
 
-" Reformat paragraphs and list.
-nnoremap <leader>r gq}
+nnoremap <leader>r gq       " Reformat selected text.
+nnoremap <leader>pr gq}     " Reformat paragraph.
 
 " Configure leader guide.
 let g:lmap = {}

@@ -2,13 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 
-;; Don't show the ugly tool bar and scroll bar. Also avoid
-;; the menu bar if not in GUI mode.
+;; don't show the ugly stuff
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
-(unless (display-graphic-p)
+(when (fboundp 'menu-bar-mode)
   (menu-bar-mode -1))
 
 ;; turn off annoying splash screen and message
@@ -24,16 +23,14 @@
 ;; enable y/n answers
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(display-time-mode t)
-(size-indication-mode t)
-
+;; Interactively show available commands
 (use-package which-key
   :config
   (setq which-key-idle-delay 0.5)
   (setq which-key-min-display-lines 3)
   (which-key-mode t))
 
-;; Set default font
+;; Set default UI font
 (set-face-attribute 'default nil
                     :family "Input"
                     :height 140
@@ -44,7 +41,6 @@
 (require 'diminish)
 
 ;; powerline
-;(use-package powerline-evil)
 (use-package powerline
   :ensure powerline-evil
   :init
@@ -58,9 +54,9 @@
 ;(use-package leuven-theme
 ;  :config
 ;  (load-theme 'leuven t))
-(use-package moe-theme)
+(use-package moe-theme
   :config
-  (moe-light)
+  (moe-light))
 ;  (powerline-moe-theme))
 ;(require 'moe-theme-switcher)
 
@@ -71,10 +67,6 @@
           ;; delegate theming to the currently active theme
           sml/theme nil)
     (add-hook 'after-init-hook #'sml/setup)))
-
-(use-package color-identifiers-mode
-  :config
-  (add-hook 'after-init-hook 'global-color-identifiers-mode))
 
 (provide 'init-ui)
 ;;; init-ui.el ends here

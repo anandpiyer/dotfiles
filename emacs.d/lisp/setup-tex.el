@@ -1,6 +1,7 @@
 ;;; setup-tex.el --- latex configuration
 ;;; commentary:
 ;;; code:
+
 (setenv "PATH"
         (concat
          (getenv "PATH")
