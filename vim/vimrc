@@ -14,7 +14,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
 Plug 'flazz/vim-colorschemes'
-Plug 'freeo/vim-kalisi'
 Plug 'morhetz/gruvbox'
 Plug 'junegunn/seoul256.vim'
 " Plug 'tpope/vim-fugitive'
@@ -75,6 +74,8 @@ let mapleader="\<Space>"
 
 nnoremap <leader>w :w<cr>
 inoremap <leader>w <C-c>:w<cr>
+nnoremap <leader>bs :Buffers<cr>
+nnoremap <leader>bd :bd<cr>
 
 ino fd <esc>
 cno fd <esc>
@@ -87,8 +88,10 @@ nnoremap <Down> <nop>
 nnoremap <Left> <nop>
 nnoremap <Right> <nop>
 
-nnoremap <leader>r gq       " Reformat selected text.
-nnoremap <leader>pr gq}     " Reformat paragraph.
+" Reformat selected text (fill region)
+nnoremap <leader>fr gq
+" Reformat paragraph (fill paragraph)
+nnoremap <leader>fp gq}
 
 " Configure leader guide.
 let g:lmap = {}

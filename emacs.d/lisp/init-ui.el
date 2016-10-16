@@ -23,12 +23,17 @@
 ;; enable y/n answers
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+; keep modeline tidy
+(require 'diminish)
+
 ;; Interactively show available commands
 (use-package which-key
+  :diminish which-key-mode
   :config
-  (setq which-key-idle-delay 0.5)
-  (setq which-key-min-display-lines 3)
-  (which-key-mode t))
+  (progn
+    (setq which-key-idle-delay 0.5)
+    (setq which-key-min-display-lines 3)
+    (which-key-mode t)))
 
 ;; Set default UI font
 (set-face-attribute 'default nil
@@ -37,15 +42,12 @@
                     :weight 'normal
                     :width 'normal)
 
-; keep modeline tidy
-(require 'diminish)
-
 ;; powerline
-(use-package powerline
-  :ensure powerline-evil
-  :init
-  (powerline-evil-vim-color-theme))
-(add-hook 'after-init-hook 'powerline-reset)
+(use-package powerline)
+;  :ensure powerline-evil
+;  :init
+;  (powerline-moe-theme))
+;(add-hook 'after-init-hook 'powerline-reset)
 
 ;(use-package gruvbox-theme
 ;  :config
@@ -56,9 +58,10 @@
 ;  (load-theme 'leuven t))
 (use-package moe-theme
   :config
-  (moe-light))
-;  (powerline-moe-theme))
-;(require 'moe-theme-switcher)
+  (progn
+    (powerline-moe-theme)
+    (require 'moe-theme-switcher)
+    (add-hook 'after-init-hook 'powerline-reset)))
 
 (use-package smart-mode-line
   :config
@@ -67,6 +70,10 @@
           ;; delegate theming to the currently active theme
           sml/theme nil)
     (add-hook 'after-init-hook #'sml/setup)))
+
+(use-package rainbow-delimiters
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 (provide 'init-ui)
 ;;; init-ui.el ends here

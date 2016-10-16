@@ -2,7 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 (use-package evil
-  :config
+  :defer t
+  :init
   (evil-mode 1)
 
   (use-package evil-leader
@@ -12,10 +13,13 @@
     (evil-leader/set-key
       "w" 'save-buffer
       "e" 'find-file
-      "b" 'switch-to-buffer
-      "d" 'kill-this-buffer
+      "bs" 'switch-to-buffer
+      "bd" 'kill-this-buffer
       "q" 'quit-window
-      "r" 'evil-fill-and-move)))
+      "fr" 'evil-fill-and-move)
+    (evil-leader/set-key-for-mode 'latex-mode
+      "fr" 'LaTeX-fill-region
+      "fp" 'LaTeX-fill-paragraph)))
     
 (provide 'setup-evil)
 ;;; setup-evil.el ends here

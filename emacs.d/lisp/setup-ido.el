@@ -6,6 +6,7 @@
   :config
   (setq ido-enable-prefix nil
         ido-create-new-buffer 'always
+        ido-use-virtual-buffers t
         ido-enable-flex-matching t
         ido-use-filename-at-point 'guess
         ido-max-prospects 10
