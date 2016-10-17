@@ -26,6 +26,7 @@
 (require 'init-core)
 (require 'init-ui)
 (require 'init-editor)
+(require 'init-keybindings)
 
 (load active-modules-file)
 

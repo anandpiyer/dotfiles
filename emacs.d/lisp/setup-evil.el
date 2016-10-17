@@ -4,22 +4,14 @@
 (use-package evil
   :defer t
   :init
-  (evil-mode 1)
+  (setq evil-emacs-state-cursor '("red" box)
+        evil-motion-state-cursor '("orange" box)
+        evil-normal-state-cursor '("blue" box)
+        evil-visual-state-cursor '("orange" box)
+        evil-insert-state-cursor '("red" bar)
+        evil-replace-state-cursor '("red" bar)
+        evil-operator-state-cursor '("red" hollow))
+  (evil-mode 1))
 
-  (use-package evil-leader
-    :config
-    (global-evil-leader-mode)
-    (evil-leader/set-leader "<SPC>")
-    (evil-leader/set-key
-      "w" 'save-buffer
-      "e" 'find-file
-      "bs" 'switch-to-buffer
-      "bd" 'kill-this-buffer
-      "q" 'quit-window
-      "fr" 'evil-fill-and-move)
-    (evil-leader/set-key-for-mode 'latex-mode
-      "fr" 'LaTeX-fill-region
-      "fp" 'LaTeX-fill-paragraph)))
-    
 (provide 'setup-evil)
 ;;; setup-evil.el ends here
