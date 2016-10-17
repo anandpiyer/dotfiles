@@ -5,11 +5,13 @@
 ;; hybrid relative line number
 (use-package nlinum
   :init
-  (setq nlinum-format "%4d")
-  (global-nlinum-mode t)
+  (progn
+    (setq nlinum-format "%4d")
+    (global-nlinum-mode t)))
 
-  (use-package nlinum-relative
-    :init
+(use-package nlinum-relative
+  :init
+  (progn
     (nlinum-relative-setup-evil)
     (setq nlinum-relative-redisplay-delay 0)
     (add-hook 'prog-mode-hook 'nlinum-relative-mode)))
@@ -38,6 +40,7 @@
 ;; show fill column
 (setq-default fill-column 80)
 (use-package fill-column-indicator
+  :diminish (fci-mode . " ⓕ")
   :defer t
   :init
   (dolist (hooks '(prog-mode-hook

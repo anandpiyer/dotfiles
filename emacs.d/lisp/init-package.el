@@ -1,5 +1,9 @@
 ;;; init-package.el --- Initialize package related things
+;;
 ;;; Commentary:
+;;
+;; Declare archives and bootstrap use-package.
+;;
 ;;; Code:
 (require 'package)
 (setq package-archives '(("melpa" . "http://melpa.org/packages/")
@@ -17,6 +21,8 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+;; Lazy loading macro
+;; http://milkbox.net/note/single-file-master-emacs-configuration/
 (defmacro after (mode &rest body)
   "`eval-after-load' MODE evaluate BODY."
   (declare (indent defun))

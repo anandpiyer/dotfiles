@@ -29,8 +29,8 @@
         helm-scroll-amount 8
         helm-ff-file-name-history-use-recentf t
         helm-echo-input-in-header-line t)
-    (setq helm-autoresize-min-height 10
-          helm-autoresize-max-height 30)
+    (setq helm-autoresize-min-height 30
+          helm-autoresize-max-height 0)
     (helm-autoresize-mode 1)))
 
 (use-package helm-swoop

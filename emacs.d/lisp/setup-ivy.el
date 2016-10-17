@@ -1,9 +1,9 @@
 ;;; setup-ivy.el --- Ivy setup
 ;;
 ;;; Commentary:
-
+;;
 ;; Setup ivy and related packages.
-
+;;
 ;;; Code:
 (use-package ivy
   :commands ivy-switch-buffer
@@ -11,9 +11,7 @@
   :config
  (progn (ivy-mode)
   (setq ivy-use-virtual-buffers t
-        ivy-count-format "(%d/%d) ")
-  (setq ivy-re-builders-alist
-      '((t . ivy--regex-fuzzy)))))
+        ivy-count-format "(%d/%d) ")))
 
 (use-package swiper
   :commands swiper)
@@ -29,5 +27,4 @@
    ))
 
 (provide 'setup-ivy)
-
 ;;; setup-ivy.el ends here

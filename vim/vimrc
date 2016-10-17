@@ -16,7 +16,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'flazz/vim-colorschemes'
 Plug 'morhetz/gruvbox'
 Plug 'junegunn/seoul256.vim'
-" Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-vinegar'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': '.install --all' }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'

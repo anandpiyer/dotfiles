@@ -26,7 +26,7 @@
 
   (general-define-key :prefix my-leader
                       :keymaps 'LaTeX-mode-map
-                      "f" '(:ignore t :which-key "Reformat")
+                      "f" '(:ignore t :which-key "Format")
                       "fr" 'LaTeX-fill-region
                       "fp" 'LaTeX-fill-paragraph))
   
