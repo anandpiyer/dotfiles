@@ -1,5 +1,8 @@
 set nocompatible
-set encoding=utf8
+ 
+"------------------------------------------------------------------------------
+" Plugins
+" -----------------------------------------------------------------------------
 
 " Set up Plug if not present.
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -24,8 +27,6 @@ Plug 'easymotion/vim-easymotion'
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'edkolev/tmuxline.vim'
-"Plug 'edkolev/promptline.vim'
 Plug 'myusuf3/numbers.vim'
 Plug 'tpope/vim-obsession'
 Plug 'hecal3/vim-leader-guide'
@@ -34,9 +35,17 @@ Plug 'scrooloose/nerdcommenter'
 
 call plug#end()
 
-filetype plugin indent on     
-syntax enable
+filetype plugin indent on 
 
+"------------------------------------------------------------------------------
+" General
+" -----------------------------------------------------------------------------
+
+syntax enable                   " Enable syntax highlighting. 
+
+if &encoding ==# 'latin1' && has('gui_running')
+  set encoding=utf-8
+endif
 set autoindent                  " Indentation level for next line.
 set backspace=indent,eol,start  " Be more flexible with backspace.
 set autoread                    " reload files when changed.
@@ -62,12 +71,22 @@ set nobackup                    " No need for backups.
 set nowb                        " No autobackup.
 set noswapfile                  " No swap.
 
-let g:is_posix=1
-let g:deoplete#enable_at_startup = 1
+"------------------------------------------------------------------------------
+" Plugin related settings
+" -----------------------------------------------------------------------------
+
+"  airline
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#fnamemod=':t'
+let g:airline_powerline_fonts=1
+
+" deoplete
+let g:deoplete#enable_at_startup=1
 
 "------------------------------------------------------------------------------
 " Key remaps
 "------------------------------------------------------------------------------
+
 let mapleader="\<Space>"
 
 nnoremap <leader>w :w<cr>
@@ -109,12 +128,7 @@ let g:gruvbox_contrast_light='hard'
 set background=light
 colorscheme gruvbox
 
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#fnamemod=':t'
-let g:airline_powerline_fonts=1
-
 if has('nvim')
     set termguicolors	" Doesn't work with Terminal.app.
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-    let g:airline#extensions#tmuxline#enabled=0
 endif

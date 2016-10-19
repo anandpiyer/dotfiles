@@ -35,12 +35,15 @@
 ; delete selections with keypress
 (delete-selection-mode t)
 
-(global-visual-line-mode 1)
+(use-package visual-line-mode
+  :ensure nil
+  :diminish (visual-line-mode . " Ⓛ")
+  :init (global-visual-line-mode 1))
 
 ;; show fill column
 (setq-default fill-column 80)
 (use-package fill-column-indicator
-  :diminish (fci-mode . "ⓕ")
+  :diminish (fci-mode . " ⓕ")
   :defer t
   :init
   (dolist (hooks '(prog-mode-hook
@@ -54,7 +57,8 @@
 
 ;; aggressive indentation
 (use-package aggressive-indent
-  :diminish (aggressive-indent-mode . "Ⓘ")
+  :diminish (aggressive-indent-mode . " Ⓘ")
+  :defer t
   :config
   (progn (global-aggressive-indent-mode 1)
          (add-to-list 'aggressive-indent-excluded-modes
@@ -63,14 +67,24 @@
 ;; smarter paranthesis
 (use-package smartparens
   :diminish (smartparens-mode)
+  :defer t
   :config
   (progn (require 'smartparens-config)
          (smartparens-global-mode 1)))
 
 (use-package evil-smartparens
   :diminish (evil-smartparens-mode)
+  :defer t
   :config
   (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode))
+
+(use-package undo-tree
+  :diminish undo-tree-mode
+  :config
+  (progn
+    (global-undo-tree-mode)
+    (setq undo-tree-visualizer-timestamps t)
+    (setq undo-tree-visualizer-diff t)))
 
 (provide 'init-editor)
 ;;; init-editor.el ends here

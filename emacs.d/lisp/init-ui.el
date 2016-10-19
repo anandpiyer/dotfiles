@@ -16,9 +16,9 @@
       inhibit-startup-message t)
 
 ;; better scrolling
-;; (setq scroll-conservatively 100000
-;;       scroll-preserve-screen-position t
-;;       scroll-margin 3)
+(setq scroll-conservatively 100000
+      scroll-preserve-screen-position t
+      scroll-margin 3)
 
 ;; enable y/n answers
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -38,10 +38,10 @@
                     :weight 'normal
                     :width 'normal)
 
-;;Powerline
-(use-package powerline
-  :init
-  (setq powerline-default-separator 'slant))
+;; Powerline
+;; (use-package powerline
+;;   :init
+;;   (setq powerline-default-separator 'slant))
 
 ;; (use-package powerline-evil
 ;;   :init
@@ -49,34 +49,34 @@
 ;;   (add-hook 'after-init-hook 'powerline-reset))
 
 ;; (use-package spaceline
-;; :init
-;; (progn (setq spaceline-minor-modes-separator " ")
-;; (require 'spaceline-config)
-;; (spaceline-spacemacs-theme)
-;; (add-hook 'after-init-hook 'powerline-reset)))
+;;   :init
+;;   (progn (setq spaceline-minor-modes-separator " ")
+;;          (require 'spaceline-config)
+;;          (spaceline-spacemacs-theme)
+;;          (add-hook 'after-init-hook 'powerline-reset)))
 
-;; (use-package gruvbox-theme
-;; :config
-;; (load-theme 'gruvbox t))
-
-;; (use-package smart-mode-line
-;;   :config
-;;   (use-package smart-mode-line-powerline-theme)
-;;   (setq sml/no-confirm-load-theme t)
-;;                                         ;(setq sml/theme 'respectful)
-;;   (require 'smart-mode-line)
-;;   (sml/setup))
-
-(use-package moe-theme
+(use-package gruvbox-theme
   :config
-  (progn
-    (powerline-moe-theme)
-    (require 'moe-theme-switcher)
-    (add-hook 'after-init-hook 'powerline-reset)))
+  (load-theme 'gruvbox t))
+
+;; (use-package moe-theme
+;;   :config
+;;   (progn
+;;     ;;(powerline-moe-theme)
+;; (require 'moe-theme-switcher)))
+;;(add-hook 'after-init-hook 'powerline-reset)))
+
+(use-package smart-mode-line
+  :config
+  (progn (setq sml/no-confirm-load-theme t
+               sml/theme 'automatic)
+         (sml/setup)))
 
 (use-package rainbow-delimiters
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
+(setq ns-use-srgb-colorspace nil)
 
 (provide 'init-ui)
 

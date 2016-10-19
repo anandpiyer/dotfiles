@@ -3,10 +3,10 @@
 ;;; Code:
 
 (use-package flycheck
-  :init
-  (global-flycheck-mode 1)
-  :diminish
-  (flycheck-mode))
+  :defer t
+  :diminish (flycheck-mode . " ⓢ")
+  :config (global-flycheck-mode 1))
 
 (provide 'setup-flycheck)
+
 ;;; setup-flycheck.el ends here

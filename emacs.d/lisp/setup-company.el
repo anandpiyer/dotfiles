@@ -4,10 +4,10 @@
 
 (use-package company
   :defer t
-  :init
+  :config
   (global-company-mode)
   :diminish
-  (company-mode))
-  
+  (company-mode . " ⓐ"))
+
 (provide 'setup-company)
 ;;; setup-company.el ends here
