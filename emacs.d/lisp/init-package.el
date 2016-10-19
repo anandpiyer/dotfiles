@@ -18,8 +18,11 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-(require 'use-package)
+(eval-when-compile (require 'use-package))
 (setq use-package-always-ensure t)
+
+(require 'diminish)
+(require 'bind-key)
 
 ;; Lazy loading macro
 ;; http://milkbox.net/note/single-file-master-emacs-configuration/

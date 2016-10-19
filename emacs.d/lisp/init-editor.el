@@ -40,7 +40,7 @@
 ;; show fill column
 (setq-default fill-column 80)
 (use-package fill-column-indicator
-  :diminish (fci-mode . " ⓕ")
+  :diminish (fci-mode . "ⓕ")
   :defer t
   :init
   (dolist (hooks '(prog-mode-hook
@@ -51,6 +51,26 @@
 ;; turn on auto-fill mode
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'latex-mode-hook 'turn-on-auto-fill)
+
+;; aggressive indentation
+(use-package aggressive-indent
+  :diminish (aggressive-indent-mode . "Ⓘ")
+  :config
+  (progn (global-aggressive-indent-mode 1)
+         (add-to-list 'aggressive-indent-excluded-modes
+                      'text-mode)))
+
+;; smarter paranthesis
+(use-package smartparens
+  :diminish (smartparens-mode)
+  :config
+  (progn (require 'smartparens-config)
+         (smartparens-global-mode 1)))
+
+(use-package evil-smartparens
+  :diminish (evil-smartparens-mode)
+  :config
+  (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode))
 
 (provide 'init-editor)
 ;;; init-editor.el ends here

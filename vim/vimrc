@@ -15,7 +15,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
 Plug 'flazz/vim-colorschemes'
 Plug 'morhetz/gruvbox'
-Plug 'junegunn/seoul256.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-vinegar'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': '.install --all' }
@@ -25,14 +24,13 @@ Plug 'easymotion/vim-easymotion'
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'jaxbot/semantic-highlight.vim', { 'on': 'SemanticHighlight' }
 Plug 'edkolev/tmuxline.vim'
 "Plug 'edkolev/promptline.vim'
 Plug 'myusuf3/numbers.vim'
 Plug 'tpope/vim-obsession'
 Plug 'hecal3/vim-leader-guide'
 Plug 'mhinz/vim-startify'
+Plug 'scrooloose/nerdcommenter'
 
 call plug#end()
 
@@ -76,6 +74,8 @@ nnoremap <leader>w :w<cr>
 inoremap <leader>w <C-c>:w<cr>
 nnoremap <leader>bs :Buffers<cr>
 nnoremap <leader>bd :bd<cr>
+nnoremap <leader><leader> :
+nnoremap <leader>e :Files<cr>
 
 ino fd <esc>
 cno fd <esc>
@@ -102,7 +102,7 @@ vnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
 if has('gui_running')
     set lines=40
     set macligatures
-    set guifont=Input:h13
+    set guifont=Input:h14
 endif
 
 let g:gruvbox_contrast_light='hard'

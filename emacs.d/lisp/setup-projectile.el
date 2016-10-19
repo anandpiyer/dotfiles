@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (use-package projectile
-  :diminish (projectile-mode . " ⓟ")
+  :diminish (projectile-mode . "ⓟ")
   :defer t
   :commands
   (projectile-ag

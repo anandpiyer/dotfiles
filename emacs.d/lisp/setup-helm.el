@@ -8,10 +8,14 @@
 
 (use-package helm
   :diminish helm-mode
-  :init
-  (progn
-    (require 'helm-config)
-    (helm-mode))
+  :defer t
+  :commands (helm-M-x
+             helm-find-files
+             helm-buffers-list)
+  ;; :init
+  ;; (progn
+  ;;   (require 'helm-config)
+  ;;   (helm-mode))
   :bind
   (("M-x" . helm-M-x)
    ("C-x C-f" . helm-find-files)
@@ -22,6 +26,8 @@
    ("C-z" . helm-select-action))
   :config
   (progn
+    (require 'helm-config)
+    (helm-mode)
     (setq helm-split-window-in-side-p t
         helm-ff-skip-boring-files t
         helm-move-to-line-cycle-in-source t
