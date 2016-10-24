@@ -22,7 +22,9 @@
                       "bs" 'switch-to-buffer
                       "bd" 'kill-this-buffer
                       "q" 'quit-window
-                      "fr" 'evil-fill-and-move)
+                      "fr" 'evil-fill-and-move
+                      "c" '(:ignore t :which-key "Commenter")
+                      "ci" 'evilnc-comment-or-uncomment-lines)
 
   (general-define-key :prefix my-leader
                       :keymaps 'LaTeX-mode-map

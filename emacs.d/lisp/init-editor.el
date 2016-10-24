@@ -56,13 +56,13 @@
 (add-hook 'latex-mode-hook 'turn-on-auto-fill)
 
 ;; aggressive indentation
-(use-package aggressive-indent
-  :diminish (aggressive-indent-mode . " Ⓘ")
-  :defer t
-  :config
-  (progn (global-aggressive-indent-mode 1)
-         (add-to-list 'aggressive-indent-excluded-modes
-                      'text-mode)))
+;; (use-package aggressive-indent
+;;   :diminish (aggressive-indent-mode . " Ⓘ")
+;;   :defer t
+;;   :config
+;;   (progn (global-aggressive-indent-mode 1)
+;;          (add-to-list 'aggressive-indent-excluded-modes
+;;                       'text-mode)))
 
 ;; smarter paranthesis
 (use-package smartparens
@@ -85,6 +85,10 @@
     (global-undo-tree-mode)
     (setq undo-tree-visualizer-timestamps t)
     (setq undo-tree-visualizer-diff t)))
+
+;; commenting
+(use-package evil-nerd-commenter
+  :defer t)
 
 (provide 'init-editor)
 ;;; init-editor.el ends here

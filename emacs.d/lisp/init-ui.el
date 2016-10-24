@@ -55,24 +55,28 @@
 ;;          (spaceline-spacemacs-theme)
 ;;          (add-hook 'after-init-hook 'powerline-reset)))
 
-(use-package gruvbox-theme
-  :config
-  (load-theme 'gruvbox t))
+(defadvice load-theme
+    (before theme-dont-propagate activate)
+  (mapc #'disable-theme custom-enabled-themes))
 
-;; (use-package moe-theme
-;;   :config
-;;   (progn
-;;     ;;(powerline-moe-theme)
-;; (require 'moe-theme-switcher)))
-;;(add-hook 'after-init-hook 'powerline-reset)))
+(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes"))
+(setq custom-safe-themes t)
+
+(use-package seoul256-colors
+  :ensure nil
+  :init
+  ;;(setq seoul256-colors-background 237)
+  ;;(setq seoul256-colors-background 253)
+  (load-theme 'seoul256-colors t))
 
 (use-package smart-mode-line
   :config
   (progn (setq sml/no-confirm-load-theme t
-               sml/theme 'automatic)
+               sml/theme 'nil)
          (sml/setup)))
 
 (use-package rainbow-delimiters
+  :defer t
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 

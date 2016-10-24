@@ -16,9 +16,11 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
+Plug 'junegunn/seoul256.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-vinegar'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': '.install --all' }
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -83,6 +85,14 @@ let g:airline_powerline_fonts=1
 " deoplete
 let g:deoplete#enable_at_startup=1
 
+" gruvbox
+let g:gruvbox_contrast_light='soft'
+let g:gruvbox_contrast_dark='soft'
+
+" seoul256
+let g:seoul256_background = 237
+let g:seoul256_light_background = 253
+
 "------------------------------------------------------------------------------
 " Key remaps
 "------------------------------------------------------------------------------
@@ -124,7 +134,6 @@ if has('gui_running')
     set guifont=Input:h14
 endif
 
-let g:gruvbox_contrast_light='hard'
 set background=light
 colorscheme gruvbox
 
