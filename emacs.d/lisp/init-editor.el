@@ -3,19 +3,34 @@
 ;;; Code:
 
 ;; hybrid relative line number
-(use-package nlinum
+;; (use-package nlinum
+;;   :init
+;;   (progn
+;;     (setq nlinum-format "%4d")
+;;     (global-nlinum-mode t)))
+
+;; (use-package nlinum-relative
+;;   :init
+;;   (progn
+;;     (nlinum-relative-setup-evil)
+;;     (setq nlinum-relative-redisplay-delay 0)
+;;     (add-hook 'prog-mode-hook 'nlinum-relative-mode)))
+
+(use-package linum
+  :ensure nil
   :init
   (progn
-    (setq nlinum-format "%4d")
-    (global-nlinum-mode t)))
+    (setq linum-format "%4d")
+    (add-hook 'prog-mode-hook 'linum-mode)
+    (add-hook 'text-mode-hook 'linum-mode)))
 
-(use-package nlinum-relative
-  :init
-  (progn
-    (nlinum-relative-setup-evil)
-    (setq nlinum-relative-redisplay-delay 0)
-    (add-hook 'prog-mode-hook 'nlinum-relative-mode)))
-
+(use-package linum-relative
+  :diminish
+  ;;:init
+  ;;(linum-on)
+  :config
+  (setq linum-relative-current-symbol ""))
+  
 (size-indication-mode t)
 (global-hl-line-mode t)
 (show-paren-mode)

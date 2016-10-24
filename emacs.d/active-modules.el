@@ -5,6 +5,7 @@
 ;; specify the modules that are to be loaded.
 ;;
 ;;; Code:
+(require 'setup-git)
 (require 'setup-org)
 (require 'setup-evil)
 ;;(require 'setup-ido)

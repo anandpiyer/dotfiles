@@ -62,12 +62,17 @@
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes"))
 (setq custom-safe-themes t)
 
-(use-package seoul256-colors
-  :ensure nil
-  :init
-  ;;(setq seoul256-colors-background 237)
-  ;;(setq seoul256-colors-background 253)
-  (load-theme 'seoul256-colors t))
+(use-package seoul256
+   :ensure nil
+   :init
+   (setq seoul256-background 237)
+   (setq seoul256-background 253)
+   (load-theme 'seoul256 t))
+
+;; (use-package gruvbox-theme
+;;   :config
+;;   (progn (setq gruvbox-contrast 'soft)
+;;          (load-theme 'gruvbox t)))
 
 (use-package smart-mode-line
   :config
@@ -80,7 +85,7 @@
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
-(setq ns-use-srgb-colorspace nil)
+;;(setq ns-use-srgb-colorspace nil)
 
 (provide 'init-ui)
 

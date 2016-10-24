@@ -15,7 +15,7 @@
   (general-evil-setup t)
 
   (general-define-key :prefix my-leader
-                      "SPC" 'execute-extended-command
+                      "SPC" 'counsel-M-x
                       "e" 'find-file
                       "w" 'save-buffer
                       "b" '(:ignore t :which-key "Buffer")

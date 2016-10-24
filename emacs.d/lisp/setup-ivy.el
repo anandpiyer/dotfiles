@@ -26,5 +26,8 @@
    ("C-c l"   . counsel-locate)
    ))
 
+(use-package smex
+  :defer t)
+
 (provide 'setup-ivy)
 ;;; setup-ivy.el ends here
