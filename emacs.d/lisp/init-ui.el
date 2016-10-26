@@ -20,6 +20,9 @@
       scroll-preserve-screen-position t
       scroll-margin 3)
 
+;; make mouse less jumpy
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+     
 ;; enable y/n answers
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -65,9 +68,9 @@
 (use-package seoul256
    :ensure nil
    :init
-   (setq seoul256-background 237)
-   (setq seoul256-background 253)
-   (load-theme 'seoul256 t))
+   (progn (setq seoul256-background 237)
+          (setq seoul256-alternate-background 252)
+          (load-theme 'seoul256 t)))
 
 ;; (use-package gruvbox-theme
 ;;   :config
