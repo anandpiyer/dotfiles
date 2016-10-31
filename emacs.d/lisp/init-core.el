@@ -23,7 +23,8 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
-(setq backup-by-copying t
+(setq make-backup-files nil
+      backup-by-copying t
       version-control t
       delete-old-versions t
       create-lockfiles nil
@@ -32,9 +33,9 @@
 ;; recent files
 (require 'recentf)
 ;(setq recentf-save-file (concat emacs-cache-directory "recentf"))
-(setq recentf-max-saved-items 1000)
-(setq recentf-max-menu-items 500)
-(setq recentf-auto-cleanup 300)
+(setq recentf-max-saved-items 1000
+      recentf-max-menu-items 500
+      recentf-auto-cleanup 300)
 (recentf-mode t)
 
 ;; save sessions

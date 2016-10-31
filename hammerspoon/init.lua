@@ -105,7 +105,7 @@ end
 keysApps = {
     {'i', "iTerm2"},
     {'s', "Safari"},
-    {'m', "Airmail"},
+    {'a', "Airmail"},
     {'f', "Finder"},
     {'e', "Emacs"}
 }
@@ -133,5 +133,5 @@ function reloadConfig(files)
     end
 end
 local myWatcher = hs.pathwatcher.new("/Users/api/dotfiles/hammerspoon/", reloadConfig):start()
-hs.alert.show("Config loaded")
+hs.alert.show("Hammerspoon config loaded")
 

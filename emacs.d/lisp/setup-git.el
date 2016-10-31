@@ -2,7 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 (use-package magit
-  :defer t)
+  :defer t
+  :commands magit-status magit-blame
+  :config (setq magit-auto-revert-mode nil))
 
 ;; git-gutter and git-gutter-fringe don't play nice with nlinum.
 ;; (use-package diff-hl

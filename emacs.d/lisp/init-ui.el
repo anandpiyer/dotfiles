@@ -7,11 +7,12 @@
   (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
-(when (fboundp 'menu-bar-mode)
+(unless (display-graphic-p)
   (menu-bar-mode -1))
 
 ;; turn off annoying splash screen and message
-(setq inhibit-splash-screen t
+(setq inhibit-startup-screen t
+      inhibit-splash-screen t
       inhibit-startup-echo-area-message t
       inhibit-startup-message t)
 

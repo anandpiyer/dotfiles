@@ -135,7 +135,8 @@ if has('gui_running')
 endif
 
 set background=light
-colorscheme gruvbox
+"colorscheme gruvbox
+colorscheme seoul256
 
 if has('nvim')
     set termguicolors	" Doesn't work with Terminal.app.

@@ -3,19 +3,6 @@
 ;;; Code:
 
 ;; hybrid relative line number
-;; (use-package nlinum
-;;   :init
-;;   (progn
-;;     (setq nlinum-format "%4d")
-;;     (global-nlinum-mode t)))
-
-;; (use-package nlinum-relative
-;;   :init
-;;   (progn
-;;     (nlinum-relative-setup-evil)
-;;     (setq nlinum-relative-redisplay-delay 0)
-;;     (add-hook 'prog-mode-hook 'nlinum-relative-mode)))
-
 (use-package linum
   :ensure nil
   :init
@@ -25,7 +12,7 @@
     (add-hook 'text-mode-hook 'linum-mode)))
 
 (use-package linum-relative
-  :diminish
+  :diminish linum-relative-mode
   ;;:init
   ;;(linum-on)
   :config
@@ -36,8 +23,7 @@
 (show-paren-mode)
 (line-number-mode t)
 (column-number-mode t)
-(setq column-number-mode t)
-
+;;(setq column-number-mode t)
 (setq show-paren-delay 0)
 
 ; use spaces instead of tabs
@@ -93,6 +79,7 @@
   :config
   (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode))
 
+;; visualize for better undo
 (use-package undo-tree
   :diminish undo-tree-mode
   :config
@@ -100,6 +87,12 @@
     (global-undo-tree-mode)
     (setq undo-tree-visualizer-timestamps t)
     (setq undo-tree-visualizer-diff t)))
+
+;; highlight all symbols that match the selected
+(use-package highlight-symbol
+  :diminish highlight-symbol-mode
+  :commands highlight-symbol
+  :bind ("C-h" . highlight-symbol))
 
 ;; commenting
 (use-package evil-nerd-commenter

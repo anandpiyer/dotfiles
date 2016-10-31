@@ -7,6 +7,7 @@
   (setq ido-enable-prefix nil
         ido-create-new-buffer 'always
         ido-use-virtual-buffers t
+        ido-enable-dot-prefix t
         ido-enable-flex-matching t
         ido-use-filename-at-point 'guess
         ido-max-prospects 10
@@ -23,7 +24,7 @@
     (flx-ido-mode 1)
     ;; disable ido faces to see flx highlights
     (setq ido-use-faces nil))
-    
+
   (use-package ido-vertical-mode
     :config
     (ido-vertical-mode 1)
