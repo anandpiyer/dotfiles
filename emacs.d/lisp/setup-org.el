@@ -6,6 +6,9 @@
 ;; https://github.com/sriramkswamy/dotemacs/
 ;; 
 ;;; Code:
+
+;; use-package doesn't allow installation of org since it's part of Emacs,
+;; so the workaround is to install the contrib package.
 (use-package org-plus-contrib
   :defer t
   :bind ("C-c c" . org-capture)
@@ -32,7 +35,7 @@
                 ("p"
                  "Paper"
                  entry
-                 (file+headline (concat org-directory "references/notes.org") "Papers")
+                 (file+headline (concat org-directory "organizer.org") "Papers")
                  "* %^{Title} %(org-set-tags)  :paper: \n:PROPERTIES:\n:Created: %U\n:Linked: %a\n:END:\n%i\nNotes:\n%?"
                  :prepend t
                  :empty-lines 1
@@ -69,10 +72,18 @@
   :commands (evil-org-mode evil-org-recompute-clocks)
   :init (add-hook 'org-mode-hook 'evil-org-mode))
 
-;; superior pdf tools compared to docview
-(use-package pdf-tools
-  :defer t
-  :init (pdf-tools-install))
+;; ;; superior pdf tools compared to docview!
+;; ;; use brew to install pdf-tools so that epdfinfo gets installed properly:
+;; ;;    brew install homebrew/emacs/pdf-tools
+;; ;; and set the path to epdfinfo from brew installation.
+ (use-package pdf-tools
+   :defer t
+   :mode (("\\.pdf\\'" . pdf-view-mode))
+   :config
+   (progn
+     (custom-set-variables '(pdf-tools-handle-upgrades nil))
+     (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo")
+     (pdf-tools-install)))
 
 ;; ivy-bibtex is used by org-ref, so set it up first.
 (use-package ivy-bibtex
@@ -85,7 +96,6 @@
 ;; awesome mode for citations and stuff!
 (use-package org-ref
   :defer t
-  :ensure ivy-bibtex
   :init
   (progn (setq org-ref-completion-library 'org-ref-ivy-cite
                org-ref-notes-directory (concat org-directory "references/notes")
@@ -98,10 +108,16 @@
                                     (require 'org-ref-pdf)
                                     (require 'org-ref-url-utils)))))
 
-;; interleave PDFs within notes.
+;; interleave PDFs with notes. This needs to be after pdf-tools. See:
+;; https://github.com/rudolfochrist/interleave/issues/31#issuecomment-252351991
 (use-package interleave
-  :defer t
-  :commands (interleave interleave-pdf-mode))
+  :init
+  (progn
+    (with-eval-after-load 'doc-view
+      (bind-key "i" #'interleave--open-notes-file-for-pdf doc-view-mode-map))
+    (with-eval-after-load 'pdf-view
+      (bind-key "i" #'interleave--open-notes-file-for-pdf pdf-view-mode-map)))
+  :defer t)
 
 (provide 'setup-org)
-;;; setup-org.el ends here
+;; ;;; setup-org.el ends here

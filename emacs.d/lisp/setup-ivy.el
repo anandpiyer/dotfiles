@@ -11,7 +11,10 @@
   :config
  (progn (ivy-mode)
   (setq ivy-use-virtual-buffers t
-        ivy-count-format "(%d/%d) ")))
+        ivy-count-format "(%d/%d) "
+        ivy-re-builders-alist '((t . ivy--regex-plus)))))
+
+(use-package flx :defer t)
 
 (use-package swiper
   :commands swiper)

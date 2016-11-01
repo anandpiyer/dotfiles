@@ -41,6 +41,17 @@
     :config
     (auctex-latexmk-setup))
 
+(use-package bibtex
+  :ensure nil
+  :init
+  (setq bibtex-align-at-equal-sign t
+        bibtex-autokey-name-year-separator ""
+        bibtex-autokey-year-title-separator ""
+        bibtex-autokey-titleword-first-ignore '("the" "a" "if" "and" "an")
+        bibtex-autokey-titleword-length 0
+        bibtex-autokey-titlewords 0
+        bibtex-autokey-year-length 4))
+
 (provide 'setup-tex)
 
 ;;; setup-tex.el ends here
