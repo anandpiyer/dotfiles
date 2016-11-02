@@ -14,7 +14,8 @@
 (setq inhibit-startup-screen t
       inhibit-splash-screen t
       inhibit-startup-echo-area-message t
-      inhibit-startup-message t)
+      inhibit-startup-message t
+      use-dialog-box nil)
 
 ;; better scrolling
 (setq scroll-conservatively 100000
@@ -70,7 +71,7 @@
    :ensure nil
    :init
    (progn (setq seoul256-background 237)
-          (setq seoul256-alternate-background 252)
+          (setq seoul256-alternate-background 253)
           (load-theme 'seoul256 t)))
 
 ;; (use-package gruvbox-theme

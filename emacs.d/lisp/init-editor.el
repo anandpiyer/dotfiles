@@ -13,10 +13,7 @@
 
 (use-package linum-relative
   :diminish linum-relative-mode
-  ;;:init
-  ;;(linum-on)
-  :config
-  (setq linum-relative-current-symbol ""))
+  :init (setq linum-relative-current-symbol ""))
   
 (size-indication-mode t)
 (global-hl-line-mode t)

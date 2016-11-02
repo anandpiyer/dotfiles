@@ -18,7 +18,6 @@
         org-startup-with-inline-images t
         org-src-fontify-natively t
         org-imenu-depth 8
-        org-completion-use-ido t
         org-agenda-window-setup 'current-window
         org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
 
@@ -108,16 +107,18 @@
                                     (require 'org-ref-pdf)
                                     (require 'org-ref-url-utils)))))
 
-;; interleave PDFs with notes. This needs to be after pdf-tools. See:
-;; https://github.com/rudolfochrist/interleave/issues/31#issuecomment-252351991
+;; interleave PDFs with notes. This needs to be after pdf-tools. Also, interleave
+;; needs to be removed and reinstalled everytime pdf-tools is updated.
+;; See: https://github.com/rudolfochrist/interleave/issues/31#issuecomment-252351991
 (use-package interleave
+  :defer t
   :init
   (progn
+    (setq interleave-org-notes-dir-list `(,(concat org-directory "references")))
     (with-eval-after-load 'doc-view
       (bind-key "i" #'interleave--open-notes-file-for-pdf doc-view-mode-map))
     (with-eval-after-load 'pdf-view
-      (bind-key "i" #'interleave--open-notes-file-for-pdf pdf-view-mode-map)))
-  :defer t)
+      (bind-key "i" #'interleave--open-notes-file-for-pdf pdf-view-mode-map))))
 
 (provide 'setup-org)
-;; ;;; setup-org.el ends here
+;;; setup-org.el ends here
