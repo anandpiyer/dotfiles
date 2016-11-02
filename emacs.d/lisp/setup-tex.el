@@ -12,7 +12,9 @@
               '("/Library/TeX/texbin"
                 "/usr/local/bin")))
 
-(use-package auctex
+(use-package tex
+  :ensure nil
+  :ensure auctex
   :defer t
   :mode ("\\.tex\\'" . latex-mode)
   :init
@@ -21,17 +23,22 @@
           TeX-parse-self t
           TeX-save-query nil
           TeX-PDF-mode t
-          TeX-show-compilation t)
+          TeX-show-compilation t
+          TeX-view-program-selection '((output-pdf "PDF Tools"))
+          TeX-source-correlate-start-server t)
     (setq-default TeX-master nil)
     (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
     (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
     (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
-    (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
     (add-hook 'LaTeX-mode-hook 'LaTeX-preview-setup)
     (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-    (add-hook 'LaTeX-mode-hook 'turn-on-reftex)))
-
-(add-hook 'LaTeX-mode-hook (lambda () (setq compile-command "latexmk -pdf")))
+    (add-hook 'LaTeX-mode-hook 'turn-on-reftex))
+  :config
+  (progn
+    (unless (assoc "PDF Tools" TeX-view-program-list-builtin)
+      (push '("PDF Tools" TeX-pdf-tools-sync-view) TeX-view-program-list))
+    (add-hook 'LaTeX-mode-hook (lambda () (setq compile-command "latexmk -pdf")))
+    (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)))
 
 (use-package auctex-latexmk
     :defer t
