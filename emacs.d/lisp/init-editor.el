@@ -2,6 +2,17 @@
 ;;; Commentary:
 ;;; Code:
 
+(use-package evil
+  :defer t
+  :config (evil-mode 1))
+
+(use-package evil-escape
+  :defer t
+  :config
+  (setq-default evil-escape-key-sequence "jk"
+                evil-escape-delay 0.2)
+  :init (add-hook 'evil-mode-hook 'evil-escape-mode))
+
 ;; hybrid relative line number
 (use-package linum
   :ensure nil
@@ -14,7 +25,7 @@
 (use-package linum-relative
   :diminish linum-relative-mode
   :init (setq linum-relative-current-symbol ""))
-  
+
 (size-indication-mode t)
 (global-hl-line-mode t)
 (show-paren-mode)
@@ -94,6 +105,15 @@
 ;; commenting
 (use-package evil-nerd-commenter
   :defer t)
+
+;; take care of whitespaces
+(use-package whitespace-cleanup-mode
+  :defer t
+  :diminish (whitespace-cleanup-mode . "ⓦ")
+  :init
+  (progn
+    (setq-default show-trailing-whitespace t)
+    (add-hook 'emacs-lisp-mode-hook 'whitespace-cleanup-mode)))
 
 (provide 'init-editor)
 ;;; init-editor.el ends here

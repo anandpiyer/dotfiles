@@ -28,6 +28,12 @@
 ;; enable y/n answers
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))
+
+(when (fboundp 'winner-mode)
+  (winner-mode 1))
+
 ;; Interactively show available commands
 (use-package which-key
   :diminish which-key-mode
@@ -42,23 +48,6 @@
                     :height 140
                     :weight 'normal
                     :width 'normal)
-
-;; Powerline
-;; (use-package powerline
-;;   :init
-;;   (setq powerline-default-separator 'slant))
-
-;; (use-package powerline-evil
-;;   :init
-;;   (powerline-center-evil-theme)
-;;   (add-hook 'after-init-hook 'powerline-reset))
-
-;; (use-package spaceline
-;;   :init
-;;   (progn (setq spaceline-minor-modes-separator " ")
-;;          (require 'spaceline-config)
-;;          (spaceline-spacemacs-theme)
-;;          (add-hook 'after-init-hook 'powerline-reset)))
 
 (defadvice load-theme
     (before theme-dont-propagate activate)

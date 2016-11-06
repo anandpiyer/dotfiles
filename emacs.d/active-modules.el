@@ -5,15 +5,16 @@
 ;; specify the modules that are to be loaded.
 ;;
 ;;; Code:
-(require 'setup-git)
-(require 'setup-org)
-(require 'setup-evil)
-;;(require 'setup-ido)
-;;(require 'setup-helm)
-(require 'setup-ivy)
+
 (require 'setup-company)
 (require 'setup-flycheck)
-(require 'setup-tex)
+;; (require 'setup-helm)
+;; (require 'setup-ido)
+(require 'setup-ivy)
 (require 'setup-projectile)
-(require 'setup-ensime)
+
+(require 'setup-git)
+(require 'setup-org)
+(require 'setup-tex)
+(require 'setup-scala)
 ;;; active-modules.el ends here

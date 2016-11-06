@@ -7,17 +7,24 @@
 ;; 
 ;;; Code:
 
-;; use-package doesn't allow installation of org since it's part of Emacs,
-;; so the workaround is to install the contrib package.
+;; http://stackoverflow.com/questions/21073859/is-there-a-way-with-org-capture-templates-to-not-insert-a-line-if-initial-conten
+(defun v-i-or-nothing ()
+  "Use initial content only if available."
+  (let ((v-i (plist-get org-store-link-plist :initial)))
+    (if (equal v-i "")
+        ""
+      (concat v-i "\n"))))
+
 (use-package org-plus-contrib
   :defer t
   :bind ("C-c c" . org-capture)
   :init
-  (setq org-directory "~/org-mode/"
+  (setq org-directory org-root-directory
         org-default-notes-file (concat org-directory "organizer.org")
         org-startup-with-inline-images t
         org-src-fontify-natively t
         org-imenu-depth 8
+        org-log-into-drawer t
         org-agenda-window-setup 'current-window
         org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
 
@@ -27,54 +34,26 @@
         org-deadline-warning-days 7
         org-agenda-span 'fortnight
         org-agenda-skip-scheduled-if-deadline-is-shown t)
-  
+
   (setq org-capture-templates
-        (quote (
-                ;; For notes on paper readings
-                ("p"
-                 "Paper"
-                 entry
-                 (file+headline (concat org-directory "organizer.org") "Papers")
-                 "* %^{Title} %(org-set-tags)  :paper: \n:PROPERTIES:\n:Created: %U\n:Linked: %a\n:END:\n%i\nNotes:\n%?"
-                 :prepend t
+        (quote (("t" "Todo" entry
+                 (file+headline org-default-notes-file "Inbox")
+                 "* TODO %^{Todo}\n:PROPERTIES:\n:CREATED: %U\n:END:\n%(v-i-or-nothing)"
                  :empty-lines 1
-                 :created t
-                 :kill-buffer t)
-
-                ;; For taking notes on random things
-                ("n"
-                 "Note"
-                 entry
-                 (file+headline (concat org-directory "organizer.org") "Notes")
-                 "* %? %(org-set-tags)  :note:\n:PROPERTIES:\n:Created: %U\n:Linked: %A\n:END:\n%i"
-                 :prepend t
-                 :empty-lines 1
-                 :created t
-                 :kill-buffer t)
-
-                ;; To-dos
-                ("t"
-                 "Tasks"
-                 entry
-                 (file+headline (concat org-directory "organizer.org") "Inbox")
-                 "* TODO %^{Todo} %(org-set-tags)  :task:\n:PROPERTIES:\n:Created: %U\n:END:\n%i\n%?"
-                 :prepend t
-                 :empty-lines 1
-                 :created t
-                 :kill-buffer t)))))
+                 :immediate-finish t)))))
 
 (use-package org-bullets
   :defer t
   :init (add-hook 'org-mode-hook 'org-bullets-mode))
 
 (use-package evil-org
+  :diminish (evil-org-mode . "ⓔ")
   :commands (evil-org-mode evil-org-recompute-clocks)
   :init (add-hook 'org-mode-hook 'evil-org-mode))
 
-;; ;; superior pdf tools compared to docview!
-;; ;; use brew to install pdf-tools so that epdfinfo gets installed properly:
-;; ;;    brew install homebrew/emacs/pdf-tools
-;; ;; and set the path to epdfinfo from brew installation.
+;; use brew to install pdf-tools so that epdfinfo gets installed properly:
+;;     brew install homebrew/emacs/pdf-tools
+;; and set the path to epdfinfo from brew installation.
  (use-package pdf-tools
    :defer t
    :mode (("\\.pdf\\'" . pdf-view-mode))
@@ -84,15 +63,6 @@
      (setq pdf-info-epdfinfo-program "/usr/local/bin/epdfinfo")
      (pdf-tools-install)))
 
-;; ivy-bibtex is used by org-ref, so set it up first.
-(use-package ivy-bibtex
-  :defer t
-  :init
-  (setq bibtex-completion-bibliography `(,(concat org-directory "references/references.bib"))
-        bibtex-completion-library-path (concat org-directory "references/pdfs/")
-        bibtex-completion-notes-path (concat org-directory "references/notes.org")))
-
-;; awesome mode for citations and stuff!
 (use-package org-ref
   :defer t
   :init
@@ -119,6 +89,25 @@
       (bind-key "i" #'interleave--open-notes-file-for-pdf doc-view-mode-map))
     (with-eval-after-load 'pdf-view
       (bind-key "i" #'interleave--open-notes-file-for-pdf pdf-view-mode-map))))
+
+;; notational velocity and nvALT replacement.
+(use-package deft
+  :commands (deft)
+  :init
+  (progn
+    (setq deft-directory "~/OneDrive/Notes"
+          deft-extensions '("org" "md" "txt" "markdown")
+          deft-text-mode 'org-mode
+          deft-use-filename-as-title t
+          deft-use-filter-string-for-filename t)))
+
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
 
 (provide 'setup-org)
 ;;; setup-org.el ends here

@@ -21,7 +21,7 @@
                       "b" '(:ignore t :which-key "Buffer")
                       "bs" 'switch-to-buffer
                       "bd" 'kill-this-buffer
-                      "q" 'quit-window
+                      "q" 'delete-window
                       "fr" 'evil-fill-and-move
                       "c" '(:ignore t :which-key "Commenter")
                       "ci" 'evilnc-comment-or-uncomment-lines

@@ -18,7 +18,11 @@
 
 (defvar active-modules-file
    (expand-file-name "active-modules.el" user-emacs-directory)
-  "This file contains a list of modules that will be loaded.")
+   "This file contains a list of modules that will be loaded.")
+
+(defvar org-root-directory
+  "~/OneDrive/org-mode/"
+  "Directory where org files are stored.")
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 

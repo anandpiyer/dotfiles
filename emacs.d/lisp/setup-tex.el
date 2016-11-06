@@ -23,7 +23,8 @@
           TeX-parse-self t
           TeX-save-query nil
           TeX-PDF-mode t
-          TeX-show-compilation t
+          ;;TeX-show-compilation t
+          reftex-plug-into-AUCTeX t
           TeX-view-program-selection '((output-pdf "PDF Tools"))
           TeX-source-correlate-start-server t)
     (setq-default TeX-master nil)
@@ -58,6 +59,21 @@
         bibtex-autokey-titleword-length 0
         bibtex-autokey-titlewords 0
         bibtex-autokey-year-length 4))
+
+(defun api/current-bib ()
+  "Set the bibliography to the current directory."
+  (interactive)
+  (setq bibtex-completion-bibliography
+        (concat (file-name-directory buffer-file-name) "references.bib"))
+  (message (concat "Local bib file is " (file-name-directory
+                                   buffer-file-name) "references.bib")))
+
+(use-package ivy-bibtex
+  :defer t
+  :init
+  (setq bibtex-completion-bibliography `(,(concat org-root-directory "references/references.bib"))
+        bibtex-completion-library-path (concat org-root-directory "references/pdfs/")
+        bibtex-completion-notes-path (concat org-root-directory "references/notes.org")))
 
 (provide 'setup-tex)
 
