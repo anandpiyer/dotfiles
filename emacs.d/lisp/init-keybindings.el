@@ -31,6 +31,7 @@
                       "o" '(:ignore t :which-key "Org-Mode")
                       "oa" 'org-agenda
                       "oc" 'org-capture
+                      "od" 'org-deadline
                       "or" 'org-refile
                       "os" 'org-schedule)
 

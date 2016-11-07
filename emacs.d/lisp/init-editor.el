@@ -14,17 +14,14 @@
   :init (add-hook 'evil-mode-hook 'evil-escape-mode))
 
 ;; hybrid relative line number
-(use-package linum
-  :ensure nil
-  :init
-  (progn
-    (setq linum-format "%4d")
-    (add-hook 'prog-mode-hook 'linum-mode)
-    (add-hook 'text-mode-hook 'linum-mode)))
-
 (use-package linum-relative
   :diminish linum-relative-mode
-  :init (setq linum-relative-current-symbol ""))
+  :init
+  (progn
+    (setq linum-format "%4d"
+          linum-relative-current-symbol "")
+    (add-hook 'prog-mode-hook 'linum-mode)
+    (add-hook 'text-mode-hook 'linum-mode)))
 
 (size-indication-mode t)
 (global-hl-line-mode t)
