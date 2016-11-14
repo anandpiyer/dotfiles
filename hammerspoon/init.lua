@@ -1,14 +1,14 @@
 local hotkey = require "hs.hotkey"
 local alert = require "hs.alert"
-local caffeinate = require "hs.caffeinate"
 
 hyper = {"cmd", "alt", "ctrl", "shift"}
 
 -- -----------------------------------------------------------------------------
 -- System Management
 -- -----------------------------------------------------------------------------
+local caffeinate = require "hs.caffeinate"
 
-hs.hotkey.bind({"cmd", "shift"}, "l", function()
+hotkey.bind({"cmd", "shift"}, "l", function()
   caffeinate.lockScreen()
 end)
 
@@ -19,25 +19,25 @@ function setCaffeineDisplay(state)
   if state then
     caffeine:setIcon("caffeine-active.png")
     caffeine:setTooltip(activeMessage)
-    hs.alert.show(activeMessage)
+    alert.show(activeMessage)
   else
     caffeine:setIcon("caffeine-inactive.png")
     caffeine:setTooltip(inactiveMessage)
-    hs.alert.show(inactiveMessage)
+    alert.show(inactiveMessage)
   end
 end
 
 function caffeineClicked()
-  setCaffeineDisplay(hs.caffeinate.toggle("displayIdle"))
+  setCaffeineDisplay(caffeinate.toggle("displayIdle"))
 end
 
 if caffeine then
   caffeine:setClickCallback(caffeineClicked)
-  setCaffeineDisplay(hs.caffeinate.get("displayIdle"))
+  setCaffeineDisplay(caffeinate.get("displayIdle"))
 end
 
-hs.hotkey.bind({"cmd","shift"},"c", function()
-      setCaffeineDisplay(hs.caffeinate.toggle("displayIdle"))
+hotkey.bind({"cmd","shift"},"c", function()
+      setCaffeineDisplay(caffeinate.toggle("displayIdle"))
 end)
 
 -- -----------------------------------------------------------------------------
@@ -120,14 +120,14 @@ for i,kv in ipairs(keysWindowFunctions) do
 end
 
 switcher = hs.window.switcher.new() 
-hs.hotkey.bind(hyper,'tab',nil,function()switcher:next()end,nil,function()switcher:next()end)
+hotkey.bind(hyper,'tab',nil,function()switcher:next()end,nil,function()switcher:next()end)
 
 -- -----------------------------------------------------------------------------
 -- Application Management
 -- -----------------------------------------------------------------------------
 local application = require "hs.application"
 
-a = hs.hotkey.modal.new({}, "F16")
+a = hotkey.modal.new({}, "F16")
 
 launch = function(appName)
     local app = application.get(appName) 
@@ -153,7 +153,7 @@ end
 
 pressedA = function() a:enter() end
 releasedA = function() end
-hs.hotkey.bind(hyper, 'a', nil, pressedA, releasedA)
+hotkey.bind(hyper, 'a', nil, pressedA, releasedA)
 
 -- -----------------------------------------------------------------------------
 -- Reload config automatically upon change.
@@ -170,5 +170,5 @@ function reloadConfig(files)
     end
 end
 local myWatcher = hs.pathwatcher.new("/Users/api/dotfiles/hammerspoon/", reloadConfig):start()
-hs.alert.show("Hammerspoon config loaded")
+alert.show("Hammerspoon config loaded")
 
