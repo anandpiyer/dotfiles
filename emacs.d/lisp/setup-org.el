@@ -15,7 +15,7 @@
         ""
       (concat v-i "\n"))))
 
-(use-package org-plus-contrib
+(use-package org
   :defer t
   :bind ("C-c c" . org-capture)
   :init

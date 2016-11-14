@@ -1,11 +1,48 @@
 local hotkey = require "hs.hotkey"
 local alert = require "hs.alert"
+local caffeinate = require "hs.caffeinate"
 
 hyper = {"cmd", "alt", "ctrl", "shift"}
 
--- ----------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------
+-- System Management
+-- -----------------------------------------------------------------------------
+
+hs.hotkey.bind({"cmd", "shift"}, "l", function()
+  caffeinate.lockScreen()
+end)
+
+local caffeine = hs.menubar.new()
+local activeMessage = "Sleeping prohitited"
+local inactiveMessage = "Sleeping allowed"
+function setCaffeineDisplay(state)
+  if state then
+    caffeine:setIcon("caffeine-active.png")
+    caffeine:setTooltip(activeMessage)
+    hs.alert.show(activeMessage)
+  else
+    caffeine:setIcon("caffeine-inactive.png")
+    caffeine:setTooltip(inactiveMessage)
+    hs.alert.show(inactiveMessage)
+  end
+end
+
+function caffeineClicked()
+  setCaffeineDisplay(hs.caffeinate.toggle("displayIdle"))
+end
+
+if caffeine then
+  caffeine:setClickCallback(caffeineClicked)
+  setCaffeineDisplay(hs.caffeinate.get("displayIdle"))
+end
+
+hs.hotkey.bind({"cmd","shift"},"c", function()
+      setCaffeineDisplay(hs.caffeinate.toggle("displayIdle"))
+end)
+
+-- -----------------------------------------------------------------------------
 -- Window Management 
--- ----------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------
 hs.window.animationDuration = 0
 
 local window = require "hs.window"
@@ -85,9 +122,9 @@ end
 switcher = hs.window.switcher.new() 
 hs.hotkey.bind(hyper,'tab',nil,function()switcher:next()end,nil,function()switcher:next()end)
 
--- ----------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------
 -- Application Management
--- ----------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------
 local application = require "hs.application"
 
 a = hs.hotkey.modal.new({}, "F16")
@@ -118,9 +155,9 @@ pressedA = function() a:enter() end
 releasedA = function() end
 hs.hotkey.bind(hyper, 'a', nil, pressedA, releasedA)
 
--- ----------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------
 -- Reload config automatically upon change.
--- ----------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------
 function reloadConfig(files)
     doReload = false
     for _,file in pairs(files) do

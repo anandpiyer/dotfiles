@@ -20,8 +20,8 @@
   (progn
     (setq linum-format "%4d"
           linum-relative-current-symbol "")
-    (add-hook 'prog-mode-hook 'linum-mode)
-    (add-hook 'text-mode-hook 'linum-mode)))
+    (add-hook 'prog-mode-hook 'linum-relative-mode)
+    (add-hook 'text-mode-hook 'linum-relative-mode)))
 
 (size-indication-mode t)
 (global-hl-line-mode t)
