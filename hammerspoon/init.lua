@@ -12,6 +12,7 @@ hotkey.bind({"cmd", "shift"}, "l", function()
   caffeinate.lockScreen()
 end)
 
+-- Caffeine functionality. Icon images from KeepingYouAwake.
 local caffeine = hs.menubar.new()
 local activeMessage = "Sleeping prohitited"
 local inactiveMessage = "Sleeping allowed"

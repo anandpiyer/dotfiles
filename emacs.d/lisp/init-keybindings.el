@@ -28,6 +28,8 @@
                       "g" '(:ignore t :which-key "Git")
                       "gs" 'magit-status
                       "gd" 'magit-diff
+                      "gc" 'magit-commit
+                      "gp" 'magit-push
                       "o" '(:ignore t :which-key "Org-Mode")
                       "oa" 'org-agenda
                       "oc" 'org-capture
