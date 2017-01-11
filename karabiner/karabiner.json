@@ -3,13 +3,15 @@
         {
             "name": "Default profile",
             "selected": true,
-            "simple_modifications": {
-                "caps_lock": "left_control",
-                "left_control": "hyper"
+           "simple_modifications": {
+                "caps_lock": "left_control"
             } ,
-            "standalone_modifiers": {
-                "left_control": "escape"
+            "standalone_keys": {
+                "caps_lock": "escape"
+            },
+            "one_to_many_mappings": {
+                "left_control": ["left_control", "left_shift", "left_option", "left_command"]
             }
-        }
+       }
     ]
 }

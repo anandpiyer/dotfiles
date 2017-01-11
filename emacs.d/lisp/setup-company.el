@@ -11,7 +11,7 @@
     (setq company-dabbrev-ignore-case nil
           company-dabbrev-code-ignore-case nil
           company-dabbrev-downcase nil
-          company-idle-delay 0
+          company-idle-delay 0.1
           company-selection-wrap-around t
           company-tooltip-align-annotations 't
           company-minimum-prefix-length 2)

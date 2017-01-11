@@ -112,5 +112,13 @@
     (setq-default show-trailing-whitespace t)
     (add-hook 'emacs-lisp-mode-hook 'whitespace-cleanup-mode)))
 
+;; indent-guides
+(use-package highlight-indent-guides
+  :defer t
+  :init
+  (progn
+    (setq highlight-indent-guides-method 'column)
+    (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)))
+
 (provide 'init-editor)
 ;;; init-editor.el ends here

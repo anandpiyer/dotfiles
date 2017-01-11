@@ -8,9 +8,9 @@
 
 (require 'setup-company)
 (require 'setup-flycheck)
-;; (require 'setup-helm)
+(require 'setup-helm)
 ;; (require 'setup-ido)
-(require 'setup-ivy)
+;;(require 'setup-ivy)
 (require 'setup-projectile)
 
 (require 'setup-git)

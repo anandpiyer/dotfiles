@@ -30,7 +30,10 @@
    ))
 
 (use-package smex
-  :defer t)
+  :defer t
+  :init
+  (setq-default smex-history-length 32
+                smex-save-file (concat user-emacs-cache-directory ".smex-items")))
 
 (provide 'setup-ivy)
 ;;; setup-ivy.el ends here

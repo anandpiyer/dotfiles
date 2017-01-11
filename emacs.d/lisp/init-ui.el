@@ -60,13 +60,8 @@
    :ensure nil
    :init
    (progn (setq seoul256-background 237)
-          (setq seoul256-alternate-background 253)
+          (setq seoul256-alternate-background 252)
           (load-theme 'seoul256 t)))
-
-;; (use-package gruvbox-theme
-;;   :config
-;;   (progn (setq gruvbox-contrast 'soft)
-;;          (load-theme 'gruvbox t)))
 
 (use-package smart-mode-line
   :config

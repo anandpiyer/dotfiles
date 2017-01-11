@@ -24,6 +24,14 @@
   "~/OneDrive/org-mode/"
   "Directory where org files are stored.")
 
+(defconst user-emacs-cache-directory
+  (expand-file-name (concat user-emacs-directory ".cache/"))
+   "Directory where cache files are stored.")
+
+(defconst user-emacs-temp-directory
+  (expand-file-name (concat user-emacs-directory "tmp/"))
+   "Directory where temp files are stored.")
+
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 (require 'init-package)

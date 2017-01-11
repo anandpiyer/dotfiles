@@ -15,11 +15,11 @@
   (general-evil-setup t)
 
   (general-define-key :prefix my-leader
-                      "SPC" 'counsel-M-x
-                      "e" 'find-file
+                      "SPC" 'helm-M-x
+                      "e" 'helm-find-files
                       "w" 'save-buffer
                       "b" '(:ignore t :which-key "Buffer")
-                      "bs" 'switch-to-buffer
+                      "bs" 'helm-mini
                       "bd" 'kill-this-buffer
                       "q" 'delete-window
                       "fr" 'evil-fill-and-move
