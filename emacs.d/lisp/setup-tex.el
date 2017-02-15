@@ -23,7 +23,7 @@
           TeX-parse-self t
           TeX-save-query nil
           TeX-PDF-mode t
-          ;;TeX-show-compilation t
+          TeX-show-compilation t
           reftex-plug-into-AUCTeX t
           TeX-view-program-selection '((output-pdf "PDF Tools"))
           TeX-source-correlate-start-server t)

@@ -52,8 +52,11 @@
   :init (add-hook 'org-mode-hook 'evil-org-mode))
 
 ;; use brew to install pdf-tools so that epdfinfo gets installed properly:
-;;     brew install homebrew/emacs/pdf-tools
-;; and set the path to epdfinfo from brew installation.
+;;     brew install pdf-tools
+;; and set the path to epdfinfo from brew installation. To upgrade, do
+;; 'brew upgrade pdf-tools' PRIOR to upgrading pdf-tools emacs package. In case
+;; things are messed up, uninstall brew pdf-tools, remove elpa pdf-tools and
+;; start over.
  (use-package pdf-tools
    :defer t
    :mode (("\\.pdf\\'" . pdf-view-mode))
