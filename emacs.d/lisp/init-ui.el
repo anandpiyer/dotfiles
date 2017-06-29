@@ -56,12 +56,15 @@
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes"))
 (setq custom-safe-themes t)
 
-(use-package seoul256
-   :ensure nil
-   :init
-   (progn (setq seoul256-background 237)
-          (setq seoul256-alternate-background 252)
-          (load-theme 'seoul256 t)))
+;; (use-package seoul256
+;;    :ensure nil
+;;    :init
+;;    (progn (setq seoul256-background 237)
+;;           (setq seoul256-alternate-background 252)
+;;           (load-theme 'seoul256 t)))
+
+(use-package gruvbox
+  :init (load-theme 'gruvbox t))
 
 (use-package smart-mode-line
   :config

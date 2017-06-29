@@ -4,7 +4,12 @@
 
 (use-package evil
   :defer t
-  :config (evil-mode 1))
+  :init (evil-mode 1))
+
+(use-package evil-goggles
+  :defer t
+  :config
+    (evil-goggles-mode))
 
 ;; hybrid relative line number
 (use-package linum-relative

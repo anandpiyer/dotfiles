@@ -1,11 +1,75 @@
 {
     "global": {
         "check_for_updates_on_startup": true,
-        "show_in_menu_bar": false,
+        "show_in_menu_bar": true,
         "show_profile_name_in_menu_bar": false
     },
     "profiles": [
         {
+            "complex_modifications": {
+                "parameters": {
+                    "basic.to_if_alone_timeout_milliseconds": 1000
+                },
+                "rules": [
+                    {
+                        "manipulators": [
+                            {
+                                "description": "Change left_control key to hyper (command+control+option+shift).",
+                                "from": {
+                                    "key_code": "left_control",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_control",
+                                        "modifiers": [
+                                            "left_command",
+                                            "left_option",
+                                            "left_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "manipulators": [
+                            {
+                                "description": "Change caps_lock key to left_control. (Post escape key when pressed alone)",
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_control",
+                                        "modifiers": {
+                                            "optional": [
+                                                "any"
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "escape"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
+            },
             "devices": [],
             "fn_function_keys": {
                 "f1": "display_brightness_decrement",
@@ -22,25 +86,11 @@
                 "f9": "fastforward"
             },
             "name": "Default profile",
-            "one_to_many_mappings": {
-                "left_control": [
-                    "left_control",
-                    "left_shift",
-                    "left_option",
-                    "left_command"
-                ]
-            },
             "selected": true,
-            "simple_modifications": {
-                "caps_lock": "left_control"
-            },
-            "standalone_keys": {
-                "caps_lock": "escape"
-            },
+            "simple_modifications": {},
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
-                "keyboard_type": "ansi",
-                "standalone_keys_delay_milliseconds": 200
+                "keyboard_type": "ansi"
             }
         }
     ]

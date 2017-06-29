@@ -16,8 +16,12 @@
 
   (general-define-key :prefix my-leader
                       "SPC" 'helm-M-x
-                      "e" 'helm-find-files
                       "w" 'save-buffer
+                      "s" '(:ignore t :which-key "Search")
+                      "sb" '(swiper-helm :which-key "Current buffer")
+                      "sB" '(swiper-all :which-key "All open buffers")
+                      "sf" '(helm-do-grep-ag :which-key "All files in this directory")
+                      "e" 'helm-find-files
                       "b" '(:ignore t :which-key "Buffer")
                       "bs" 'helm-mini
                       "bd" 'kill-this-buffer

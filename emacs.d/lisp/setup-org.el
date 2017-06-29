@@ -32,8 +32,13 @@
         (list (concat org-directory "organizer.org")
               (concat org-directory "references/notes.org"))
         org-deadline-warning-days 7
-        org-agenda-span 'fortnight
-        org-agenda-skip-scheduled-if-deadline-is-shown t)
+        org-agenda-start-on-weekday nil
+        org-agenda-show-all-dates t
+        org-agenda-skip-deadline-if-done t
+        org-agenda-skip-scheduled-if-done t
+        org-agenda-span 7
+        org-agenda-skip-scheduled-if-deadline-is-shown t
+        org-reverse-note-order t)
 
   (setq org-capture-templates
         (quote (("t" "Todo" entry
@@ -93,7 +98,7 @@
     (with-eval-after-load 'pdf-view
       (bind-key "i" #'interleave--open-notes-file-for-pdf pdf-view-mode-map))))
 
-;; notational velocity and nvALT replacement.
+ ;; notational velocity and nvALT replacement.
 (use-package deft
   :commands (deft)
   :init

@@ -11,6 +11,7 @@
 (require 'setup-helm)
 ;; (require 'setup-ido)
 ;;(require 'setup-ivy)
+(require 'setup-yasnippet)
 (require 'setup-projectile)
 
 (require 'setup-git)

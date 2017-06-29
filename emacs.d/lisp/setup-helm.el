@@ -64,12 +64,17 @@
           helm-ff-file-name-history-use-recentf t)
     (setq helm-autoresize-min-height 20
           helm-autoresize-max-height 0)
+    (setq helm-grep-ag-command "rg --smart-case --no-heading --line-number %s %s %s")
     (helm-autoresize-mode 1)))
 
-(use-package helm-swoop
+;(use-package helm-swoop
+;  :defer t
+;  :commands (helm-swoop)
+                                        ;  :bind (("C-c /" . helm-swoop)))
+(use-package swiper-helm
   :defer t
-  :commands (helm-swoop)
-  :bind (("C-c /" . helm-swoop)))
+  :commands (swiper-helm)
+  :bind (("C-s" . swiper-helm)))
 
 (provide 'setup-helm)
 ;;; setup-helm.el ends here
