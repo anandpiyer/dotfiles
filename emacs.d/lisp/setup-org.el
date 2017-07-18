@@ -30,7 +30,7 @@
 
   (setq org-agenda-files
         (list (concat org-directory "organizer.org")
-              (concat org-directory "references/notes.org"))
+              (concat org-directory "papers/notes.org"))
         org-deadline-warning-days 7
         org-agenda-start-on-weekday nil
         org-agenda-show-all-dates t
@@ -45,7 +45,15 @@
                  (file+headline org-default-notes-file "Inbox")
                  "* TODO %^{Todo}\n:PROPERTIES:\n:CREATED: %U\n:END:\n%(v-i-or-nothing)"
                  :empty-lines 1
-                 :immediate-finish t)))))
+                 :prepend t
+                 :immediate-finish t)
+                ("p" "Paper" entry
+                 (file+headline org-default-notes-file "Papers")
+                 "* %^{Title} %(org-set-tags)\n:PROPERTIES:\n:Created: %U\n:Linked: %a\n:END:\n%i\nBrief description:\n%?"
+                 :prepend t
+                 :empty-lines 1
+                 :created t)
+                ))))
 
 (use-package org-bullets
   :defer t
@@ -75,10 +83,10 @@
   :defer t
   :init
   (progn (setq org-ref-completion-library 'org-ref-ivy-cite
-               org-ref-notes-directory (concat org-directory "references/notes")
-               org-ref-bibliography-notes (concat org-directory "references/notes.org")
-               org-ref-default-bibliography `(,(concat org-directory "references/references.bib"))
-               org-ref-pdf-directory (concat org-directory "references/pdfs/"))
+               org-ref-notes-directory (concat org-directory "papers/notes")
+               org-ref-bibliography-notes (concat org-directory "papers/notes.org")
+               org-ref-default-bibliography `(,(concat org-directory "papers/references.bib"))
+               org-ref-pdf-directory (concat org-directory "papers/pdfs/"))
          (add-hook 'org-mode-hook (lambda ()
                                     (require 'org-ref)
                                     (require 'org-ref-latex)
@@ -92,7 +100,7 @@
   :defer t
   :init
   (progn
-    (setq interleave-org-notes-dir-list `(,(concat org-directory "references")))
+    (setq interleave-org-notes-dir-list `(,(concat org-directory "papers")))
     (with-eval-after-load 'doc-view
       (bind-key "i" #'interleave--open-notes-file-for-pdf doc-view-mode-map))
     (with-eval-after-load 'pdf-view

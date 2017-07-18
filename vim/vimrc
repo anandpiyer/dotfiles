@@ -133,9 +133,9 @@ if has('gui_running')
     set guifont=Input:h14
 endif
 
-set background=light
-"colorscheme gruvbox
-colorscheme seoul256
+set background=dark
+colorscheme gruvbox
+"colorscheme seoul256
 
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],

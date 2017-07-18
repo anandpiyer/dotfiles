@@ -95,9 +95,9 @@
 (use-package helm-bibtex
   :defer t
   :init
-  (setq bibtex-completion-bibliography `(,(concat org-root-directory "references/references.bib"))
-        bibtex-completion-library-path (concat org-root-directory "references/pdfs")
-        bibtex-completion-notes-path (concat org-root-directory "references/notes.org")))
+  (setq bibtex-completion-bibliography `(,(concat org-root-directory "papers/references.bib"))
+        bibtex-completion-library-path (concat org-root-directory "papers/pdfs")
+        bibtex-completion-notes-path (concat org-root-directory "papers/notes.org")))
 
 (put 'TeX-command-extra-options 'safe-local-variable #'stringp)
 

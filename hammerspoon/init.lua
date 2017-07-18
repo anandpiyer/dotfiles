@@ -100,7 +100,7 @@ local bottomLeft = {x=0,y=gh/2,w=gw/2,h=gh/2}
 local bottomRight = {x=gw/2,y=gh/2,w=gw/2,h=gh/2}
 
 keysWindowFunctions = {
-    {'f', grid.maximizeWindow},
+    --{'f', grid.maximizeWindow},
     {'h', setCellForWindow(leftHalf)},
     {'l', setCellForWindow(rightHalf)},
     {'j', setCellForWindow(bottomHalf)},
@@ -122,6 +122,18 @@ end
 
 switcher = hs.window.switcher.new() 
 hotkey.bind(hyper,'tab',nil,function()switcher:next()end,nil,function()switcher:next()end)
+
+-- -----------------------------------------------------------------------------
+-- Window Management with ChunkWM
+-- -----------------------------------------------------------------------------
+keysWindowFunctions = {
+    {'0', "chunkc tiling::desktop --equalize"}, -- equalize size of windows.
+    {'f', "chunkc tiling::window --toggle fullscreen"}
+}
+
+for i,kv in ipairs(keysWindowFunctions) do
+   hs.hotkey.bind(hyper, kv[1], function() hs.execute(kv[2], true); end) 
+end
 
 -- -----------------------------------------------------------------------------
 -- Application Management
