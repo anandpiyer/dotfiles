@@ -43,11 +43,16 @@
          (which-key-mode t)))
 
 ;; Set default UI font
+;; (set-face-attribute 'default nil
+;;                     :family "Input Mono Narrow"
+;;                     :height 140
+;;                     :weight 'extra-light
+;;                     :width 'normal)
+
 (set-face-attribute 'default nil
-                    :family "Input"
-                    :height 140
-                    :weight 'normal
-                    :width 'normal)
+                     :family "Consolas"
+                     :height 150
+                     :width 'normal)
 
 (defadvice load-theme
     (before theme-dont-propagate activate)
@@ -63,8 +68,11 @@
 ;;           (setq seoul256-alternate-background 252)
 ;;           (load-theme 'seoul256 t)))
 
-(use-package gruvbox
-  :init (load-theme 'gruvbox t))
+;; (use-package gruvbox
+;;   :init (load-theme 'gruvbox t))
+
+(use-package zenburn-theme
+  :init (load-theme 'zenburn t))
 
 (use-package smart-mode-line
   :config

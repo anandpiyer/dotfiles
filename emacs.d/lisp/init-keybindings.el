@@ -28,7 +28,7 @@
                       "q" 'delete-window
                       "fr" 'evil-fill-and-move
                       "c" '(:ignore t :which-key "Commenter")
-                      "ci" 'evilnc-comment-or-uncomment-lines
+                      "ct" '(evilnc-comment-or-uncomment-lines :which-key "Toggle comments")
                       "g" '(:ignore t :which-key "Git")
                       "gs" 'magit-status
                       "gd" 'magit-diff
@@ -39,7 +39,10 @@
                       "oc" 'org-capture
                       "od" 'org-deadline
                       "or" 'org-refile
-                      "os" 'org-schedule)
+                      "os" 'org-schedule
+                      "h" '(:ignore t :which-key "Hydras")
+                      "ht" '(api/themes-hydra/body :which-key "Switch theme")
+                      "hc" '(api/multiple-cursors-hydra/body :which-key "Multiple cursors"))
 
   (general-define-key :prefix my-leader
                       :keymaps 'LaTeX-mode-map

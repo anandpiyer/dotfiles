@@ -2,3 +2,5 @@
 	email = api@cs.berkeley.edu
 [credential]
 	helper = osxkeychain
+[core]
+	excludesfile = /Users/api/.gitignore

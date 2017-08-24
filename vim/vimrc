@@ -134,8 +134,9 @@ if has('gui_running')
 endif
 
 set background=dark
-colorscheme gruvbox
+"colorscheme gruvbox
 "colorscheme seoul256
+colorscheme zenburn
 
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],

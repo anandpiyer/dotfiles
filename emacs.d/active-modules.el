@@ -9,6 +9,7 @@
 (require 'setup-company)
 (require 'setup-flycheck)
 (require 'setup-helm)
+(require 'setup-hydra)
 ;; (require 'setup-ido)
 ;;(require 'setup-ivy)
 (require 'setup-yasnippet)

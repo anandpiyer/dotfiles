@@ -128,7 +128,8 @@ hotkey.bind(hyper,'tab',nil,function()switcher:next()end,nil,function()switcher:
 -- -----------------------------------------------------------------------------
 keysWindowFunctions = {
     {'0', "chunkc tiling::desktop --equalize"}, -- equalize size of windows.
-    {'f', "chunkc tiling::window --toggle fullscreen"}
+    {'f', "chunkc tiling::window --toggle fullscreen"},
+    {'s', "chunkc tiling::window --swap prev"}
 }
 
 for i,kv in ipairs(keysWindowFunctions) do
