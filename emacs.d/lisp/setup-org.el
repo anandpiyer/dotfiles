@@ -111,7 +111,7 @@
   :commands (deft)
   :init
   (progn
-    (setq deft-directory "~/OneDrive/Notes"
+    (setq deft-directory "~/Google Drive/Notes"
           deft-extensions '("org" "md" "txt" "markdown")
           deft-text-mode 'org-mode
           deft-use-filename-as-title t

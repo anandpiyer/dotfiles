@@ -39,10 +39,10 @@
 ; delete selections with keypress
 (delete-selection-mode t)
 
-(use-package visual-line-mode
-  :ensure nil
-  :diminish (visual-line-mode . " Ⓛ")
-  :init (global-visual-line-mode 1))
+;; (use-package visual-line-mode
+;;   :ensure nil
+;;   :diminish (visual-line-mode . " Ⓛ")
+;;   :init (global-visual-line-mode 1))
 
 ;; show fill column
 (setq-default fill-column 80)

@@ -21,7 +21,8 @@
    "This file contains a list of modules that will be loaded.")
 
 (defvar org-root-directory
-  "~/OneDrive/org-mode/"
+;;  "~/OneDrive/org-mode/"
+  "~/Dropbox/org-mode/"
   "Directory where org files are stored.")
 
 (defconst user-emacs-cache-directory

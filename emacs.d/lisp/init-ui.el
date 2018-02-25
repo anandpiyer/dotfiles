@@ -49,10 +49,18 @@
 ;;                     :weight 'extra-light
 ;;                     :width 'normal)
 
+;; (set-face-attribute 'default nil
+;;                     :family "Iosevka"
+;;                     :height 130
+;;                     :weight 'light
+;;                     :width 'normal)
+
 (set-face-attribute 'default nil
-                     :family "Consolas"
-                     :height 150
-                     :width 'normal)
+                    :family "PragmataPro"
+                    :height 130
+                    :weight 'normal
+                    :width 'normal)
+
 
 (defadvice load-theme
     (before theme-dont-propagate activate)

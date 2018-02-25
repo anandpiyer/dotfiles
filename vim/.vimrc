@@ -26,7 +26,13 @@ Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 Plug 'myusuf3/numbers.vim'
 Plug 'tpope/vim-obsession'
 Plug 'hecal3/vim-leader-guide'
@@ -80,6 +86,12 @@ set noswapfile                  " No swap.
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod=':t'
 let g:airline_powerline_fonts=1
+
+" ALE
+let g:ale_sign_warning = '▲'
+let g:ale_sign_error = '✗'
+highlight link ALEWarningSign String
+highlight link ALEErrorSign Title
 
 " deoplete
 let g:deoplete#enable_at_startup=1
