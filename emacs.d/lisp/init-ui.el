@@ -79,8 +79,11 @@
 ;; (use-package gruvbox
 ;;   :init (load-theme 'gruvbox t))
 
-(use-package zenburn-theme
-  :init (load-theme 'zenburn t))
+;;(use-package zenburn-theme
+;; :init (load-theme 'zenburn t))
+
+(use-package nord-theme
+  :init (load-theme 'nord t))
 
 (use-package smart-mode-line
   :config
@@ -94,6 +97,7 @@
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
 ;;(setq ns-use-srgb-colorspace nil)
+(setq auto-window-vscroll nil)
 
 (provide 'init-ui)
 

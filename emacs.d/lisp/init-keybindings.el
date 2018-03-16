@@ -26,7 +26,8 @@
                       "bs" 'helm-mini
                       "bd" 'kill-this-buffer
                       "q" 'delete-window
-                      "fr" 'evil-fill-and-move
+                      "f" '(:ignore t :which-key "Frame")
+                      "fd" 'delete-frame
                       "c" '(:ignore t :which-key "Commenter")
                       "ct" '(evilnc-comment-or-uncomment-lines :which-key "Toggle comments")
                       "g" '(:ignore t :which-key "Git")

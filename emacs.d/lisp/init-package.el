@@ -6,10 +6,10 @@
 ;;
 ;;; Code:
 (require 'package)
-(setq package-archives '(("melpa" . "http://melpa.org/packages/")
-                         ("melpa-stable" . "http://stable.melpa.org/packages/")
-                         ("gnu" . "http://elpa.gnu.org/packages/")
-                         ("org" . "http://orgmode.org/elpa/")))
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("melpa-stable" . "https://stable.melpa.org/packages/")
+                         ("gnu" . "https://elpa.gnu.org/packages/")
+                         ("org" . "https://orgmode.org/elpa/")))
 (setq package-enable-at-startup nil)
 (package-initialize)
 

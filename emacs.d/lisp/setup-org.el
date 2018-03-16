@@ -30,6 +30,7 @@
 
   (setq org-agenda-files
         (list (concat org-directory "organizer.org")
+              (concat org-directory "beorg.org")
               (concat org-directory "papers/notes.org"))
         org-deadline-warning-days 7
         org-agenda-start-on-weekday nil
@@ -47,6 +48,10 @@
                  :empty-lines 1
                  :prepend t
                  :immediate-finish t)
+                ("n" "Note" entry
+                 (file+headline org-default-notes-file "Notes")
+                 "* \n:PROPERTIES:\n:CREATED:%U\n:END:\n%?"
+                 )
                 ("p" "Paper" entry
                  (file+headline org-default-notes-file "Papers")
                  "* %^{Title} %(org-set-tags)\n:PROPERTIES:\n:Created: %U\n:Linked: %a\n:END:\n%i\nBrief description:\n%?"

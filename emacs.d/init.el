@@ -11,7 +11,11 @@
 ;; (package-initialize)
 
 ; increase gc-cons-threshold during init
-(setq gc-cons-threshold 100000000)
+(setq gc-cons-threshold 402653184
+      gc-cons-percentage 0.6)
+
+(defvar api--file-name-handler-alist file-name-handler-alist)
+(setq file-name-handler-alist nil)
 
 ; always prefer newer byte code
 (setq load-prefer-newer t)
@@ -48,6 +52,13 @@
 
 (require 'server)
 (unless (server-running-p) (server-start))
+
+(add-hook 'emacs-startup-hook
+           (setq file-name-handler-alist api--file-name-handler-alist))
+
+(add-hook 'emacs-startup-hook
+  (setq gc-cons-threshold 16777216
+        gc-cons-percentage 0.1))
 
 (provide 'init)
 

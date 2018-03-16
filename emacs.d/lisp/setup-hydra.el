@@ -12,17 +12,21 @@
   "
 Themes
 
-^Gruvbox^   ^Material^   ^Other^
+^Gruvbox^   ^Material^   ^Other^        ^Solarized^
 ----------------------------------------------------
-_g_: Dark     _m_: Dark    _z_: Zenburn
-_G_: Light    _M_: Light   _s_: Seoul256
+_g_: Dark   _m_: Dark    _z_: Zenburn    _s_: Dark
+_G_: Light  _M_: Light   _s_: Seoul256   _S_: Light
+                           _n_: Nord
 "
   ("g" (load-theme 'gruvbox-dark-soft  t))
   ("G" (load-theme 'gruvbox-light t))
   ("m" (load-theme 'material        t))
   ("M" (load-theme 'material-light  t))
+  ("s" (load-theme 'solarized-dark  t))
+  ("S" (load-theme 'solarized-light  t))
   ("z" (load-theme 'zenburn         t))
   ("s" (load-theme 'seoul256 t))
+  ("n" (load-theme 'nord t))
   ("RET" nil "done" :color blue))
 
 (use-package multiple-cursors

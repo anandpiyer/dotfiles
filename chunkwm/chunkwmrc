@@ -21,6 +21,8 @@ chunkc set global_desktop_offset_left    2
 chunkc set global_desktop_offset_right   2
 chunkc set global_desktop_offset_gap     4
 
+chunkc set bsp_spawn_left 0
+
 #
 # NOTE: shell commands require escaped quotes
 #       to pass value containing a whitespace.

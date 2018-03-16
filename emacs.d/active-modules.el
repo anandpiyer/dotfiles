@@ -14,6 +14,7 @@
 ;;(require 'setup-ivy)
 (require 'setup-yasnippet)
 (require 'setup-projectile)
+(require 'setup-treemacs)
 
 (require 'setup-git)
 (require 'setup-org)
