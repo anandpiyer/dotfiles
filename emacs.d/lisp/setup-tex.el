@@ -1,4 +1,4 @@
-;;; setup-tex.el --- latex configuration
+;;; setup-tex.el --- latex configuration -*- lexical-binding: t; -*-
 ;;; commentary:
 ;;; code:
 

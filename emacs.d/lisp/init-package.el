@@ -1,4 +1,4 @@
-;;; init-package.el --- Initialize package related things
+;;; init-package.el --- Initialize package related things -*- lexical-binding: t; -*-
 ;;
 ;;; Commentary:
 ;;
@@ -9,9 +9,14 @@
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("melpa-stable" . "https://stable.melpa.org/packages/")
                          ("gnu" . "https://elpa.gnu.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")))
-(setq package-enable-at-startup nil)
+                         ("org" . "https://orgmode.org/elpa/"))
+      package-enable-at-startup nil)
+
 (package-initialize)
+
+(unless (package-installed-p 'diminish)
+  (package-refresh-contents)
+  (package-install 'diminish))
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)

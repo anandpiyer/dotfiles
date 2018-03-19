@@ -1,12 +1,10 @@
-;;; setup-hydra.el --- Hydra
+;;; setup-hydra.el --- Hydra -*- lexical-binding: t; -*-
 ;;
 ;;; Commentary:
 ;;
 ;; Hydra related settings
 ;;
 ;;; Code:
-(use-package hydra
-  :defer t)
 
 (defhydra api/themes-hydra (:hint nil :color pink :columns 3)
   "

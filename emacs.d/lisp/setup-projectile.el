@@ -1,4 +1,4 @@
-;;; setup-projectile.el --- Projectile related things
+;;; setup-projectile.el --- Projectile -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 (use-package projectile
