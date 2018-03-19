@@ -105,7 +105,7 @@
   (require 'setup-helm)
   (require 'setup-ivy)
   (require 'setup-yasnippet)
-  ;(require 'setup-projectile)
+  (require 'setup-projectile)
   ;(require 'setup-treemacs)
 
   (require 'setup-git)

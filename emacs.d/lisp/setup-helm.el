@@ -10,7 +10,7 @@
   "The helm text prompt prefix string is globally replaced with this string.")
 
 (use-package helm
-  :diminish helm-modea
+  :diminish helm-mode
   :ensure helm-projectile
   :init
   (setq helm-quick-update t
@@ -40,17 +40,17 @@
   (load "helm-autoloads" nil t)
   (add-hook 'emacs-startup-hook #'helm-mode)
 
-  (defvar helm-projectile-find-file-map (make-sparse-keymap))
-  (require 'helm-projectile)
-  (set-keymap-parent helm-projectile-find-file-map helm-map)
+  ;;(defvar helm-projectile-find-file-map (make-sparse-keymap))
+  ;;(require 'helm-projectile)
+  ;;(set-keymap-parent helm-projectile-find-file-map helm-map)
 
   ;; helm is too heavy for find-file-at-point
   ;(after! helm-mode
   ;  (add-to-list 'helm-completing-read-handlers-alist '(find-file-at-point . nil)))
 
   ;(set! :popup "\\` ?\\*[hH]elm.*?\\*\\'" :size 14 :regexp t)
-  (setq projectile-completion-system 'helm)
-    ;;; Helm hacks
+
+  ;;; Helm hacks
   ;; (defun +helm*replace-prompt (plist)
   ;;   "Globally replace helm prompts with `+helm-global-prompt'."
   ;;   (if (keywordp (car plist))
