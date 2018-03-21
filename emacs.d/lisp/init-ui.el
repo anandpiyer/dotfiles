@@ -54,6 +54,20 @@
 ;;       inhibit-startup-message t
 ;;       use-dialog-box nil)
 
+;; Save and retrieve window configurations.
+(use-package eyebrowse
+  :init
+  (setq eyebrowse-wrap-around t)
+  (eyebrowse-mode))
+
+;; Visually select windows.
+(use-package ace-window
+  :defer t
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
+        aw-scope 'frame
+        aw-background t))
+
 ;; Rainbow delimiters to manage delimiter explosion.
 (use-package rainbow-delimiters
   :hook (prog-mode-hook . rainbow-delimiters-mode)
@@ -86,49 +100,49 @@
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes"))
 (setq custom-safe-themes t)
 
-(use-package seoul256-theme
-    :config
-    (setq seoul256-background 236
-          seoul256-alternate-background 252)
-    (load-theme 'seoul256 t)
-    (with-eval-after-load "seoul256-theme"
-      (custom-theme-set-faces
-       'seoul256
-       '(font-lock-comment-delimiter-face ((t (:foreground "gray45"))))
-       '(font-lock-comment-face ((t (:foreground "gray45"))))
-       '(font-lock-doc-face ((t (:foreground "gray70"))))
-       '(linum ((t (:foreground "gray37"))))
+;; (use-package seoul256-theme
+;;     :config
+;;     (setq seoul256-background 236
+;;           seoul256-alternate-background 252)
+;;     (load-theme 'seoul256 t)
+;;     (with-eval-after-load "seoul256-theme"
+;;       (custom-theme-set-faces
+;;        'seoul256
+;;        '(font-lock-comment-delimiter-face ((t (:foreground "gray45"))))
+;;        '(font-lock-comment-face ((t (:foreground "gray45"))))
+;;        '(font-lock-doc-face ((t (:foreground "gray70"))))
+;;        '(linum ((t (:foreground "gray37"))))
 
-       `(git-gutter:added ((t (:background "darkgreen"))))
-       `(git-gutter:deleted ((t (:background "darkred"))))
-       `(git-gutter:modified ((t (:background "orange3"))))
+;;        `(git-gutter:added ((t (:background "darkgreen"))))
+;;        `(git-gutter:deleted ((t (:background "darkred"))))
+;;        `(git-gutter:modified ((t (:background "orange3"))))
        
-       ;; strike through unmatched parenthesis
-       '(rainbow-delimiters-unmatched-face ((t (:foreground "red"
-                                                :inherit unspecified
-                                                :strike-through t)))))))
+;;        ;; strike through unmatched parenthesis
+;;        '(rainbow-delimiters-unmatched-face ((t (:foreground "red"
+;;                                                 :inherit unspecified
+;;                                                 :strike-through t)))))))
 
-;; (use-package zenburn-theme
-;;    :config
-;;    (load-theme 'zenburn t)
+(use-package zenburn-theme
+   :config
+   (load-theme 'zenburn t)
 
-;;    (with-eval-after-load "zenburn-theme"
-;;      (custom-theme-set-faces
-;;       'zenburn
+   (with-eval-after-load "zenburn-theme"
+     (custom-theme-set-faces
+      'zenburn
 
-;;       '(font-lock-comment-delimiter-face ((t (:foreground "gray55"))))
-;;       '(font-lock-comment-face ((t (:foreground "gray55"))))
-;;       '(font-lock-doc-face ((t (:foreground "gray70"))))
-;;       '(shm-current-face ((t (:background "gray27"))))
-;;       '(linum ((t (:foreground "gray37"))))
-;;       '(fringe ((t (:background "#3f3f3f"))))
-;;       ;'(vhl/default-face ((t (:background "gray27"))))
-;;       ;'(vertical-border ((t (:foreground "red"))))
+      ;'(region ((t (:background "#71d3b4" :foreground "black"))))
+      '(region ((t (:background "#007475"))))
+      '(font-lock-comment-delimiter-face ((t (:foreground "gray55"))))
+      '(font-lock-comment-face ((t (:foreground "gray55"))))
+      '(font-lock-doc-face ((t (:foreground "gray70"))))
+      '(shm-current-face ((t (:background "gray27"))))
+      '(linum ((t (:foreground "gray37"))))
+      '(fringe ((t (:background "#3f3f3f"))))
       
-;;       ;; strike through unmatched parenthesis
-;;       '(rainbow-delimiters-unmatched-face ((t (:foreground "red"
-;;                                                :inherit unspecified
-;;                                                :strike-through t)))))))
+      ;; strike through unmatched parenthesis
+      '(rainbow-delimiters-unmatched-face ((t (:foreground "red"
+                                               :inherit unspecified
+                                               :strike-through t)))))))
 
 ;; Mode line.
 (use-package smart-mode-line

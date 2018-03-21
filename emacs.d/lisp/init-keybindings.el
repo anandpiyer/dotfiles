@@ -68,16 +68,24 @@
                       :prefix my-leader-key
 
                       "SPC" 'helm-M-x
-
+                      "r" 'evil-fill-and-move
+                      
                       "b" '(:ignore t :which-key "buffer")
                       "bs" 'save-buffer
                       "bb" 'helm-mini
                       "bk" 'kill-this-buffer
                       "bn" 'evil-buffer-new
-                      "b[" 'previous-buffer
-                      "b]" 'next-buffer
                       "bh" 'previous-buffer
                       "bl" 'next-buffer
+
+                      "c" '(:ignore t :which-key "window configuration")
+                      "ch" 'eyebrowse-prev-window-config
+                      "cp" 'eyebrowse-prev-window-config
+                      "cl" 'eyebrowse-next-window-config
+                      "cn" 'eyebrowse-next-window-config
+                      "cc" 'eyebrowse-close-window-config
+                      "cr" 'eyebrowse-rename-window-config
+                      "cd" 'eyebrowse--delete-window-config
 
                       "f" '(:ignore t :which-key "file")
                       "ff" 'helm-find-files
@@ -101,6 +109,12 @@
                       "or" 'org-refile
                       "os" 'org-schedule
 
+                      "p" '(:ignore t :which-key "project")
+                      "pf" 'projectile-find-file
+                      "ps" 'projectile-switch-project
+                      "pr" 'projectile-recentf
+                      "px" 'projectile-invalidate-cache
+
                       "s" '(:ignore t :which-key "search")
                       "sb" '(swiper-helm :which-key "this buffer")
                       "sB" '(swiper-all :which-key "all open buffers")
@@ -113,13 +127,14 @@
                       "ts" 'flycheck-mode
                       "th" 'highlight-symbol
 
-                      "w" '(evil-window-map :which-key "window"))
+                      "w" '(evil-window-map :which-key "window")
 
-  (general-define-key :prefix my-leader-key
-                      :keymaps 'LaTeX-mode-map
-                      "f" '(:ignore t :which-key "Format")
-                      "fr" 'LaTeX-fill-region
-                      "fp" 'LaTeX-fill-paragraph))
+                      "y" '(:ignore t :which-key "snippets")
+                      "yn" 'yas-new-snippet
+                      "yi" 'yas-insert-snippet
+                      "yv" 'yas-visit-snippet-file
+
+                      "TAB" 'ace-window))
 
 (provide 'init-keybindings)
 

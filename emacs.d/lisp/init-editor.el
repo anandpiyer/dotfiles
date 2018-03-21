@@ -44,7 +44,7 @@
 (use-package recentf
   :hook (emacs-startup-hook . recentf-mode)
   :config
-  (setq recent-save-file (concat user-emacs-cache-directory "recentf")
+  (setq recentf-save-file (concat user-emacs-cache-directory "recentf")
         recentf-max-menu-items 0
         recentf-max-saved-items 300
         recentf-filename-handlers '(file-truename)
@@ -104,123 +104,41 @@
 ;; Commenting blocks of code.
 (use-package evil-nerd-commenter :defer t)
 
-;; hybrid relative line number
-(use-package linum-relative
-  :diminish linum-relative-mode
-  :init
-  (linum-mode -1)
-  (setq linum-format "%4d"
-        linum-relative-current-symbol ""
-        linum-relative-backend 'display-line-numbers-mode)
-  (add-hook 'prog-mode-hook 'linum-relative-mode)
-  (add-hook 'text-mode-hook 'linum-relative-mode))
 ;;
 ;; Line numbers
 ;;
+(defvar api-line-numbers-style 'relative
+  "The style to use for the line number display that emulates
+  `display-line-numbers' styles, which are:
+t           Ordinary line numbers
+'relative   Relative line numbers")
 
-;; (defvar api-line-numbers-style 'relative
-;;   "The style to use for the line number display.
-;; Accepts the same arguments as `display-line-numbers', which are:
-;; nil         No line numbers
-;; t           Ordinary line numbers
-;; 'relative   Relative line numbers")
+(defun api|enable-line-numbers ()
+  (interactive)
+  (if (boundp 'display-line-numbers)
+      (setq display-line-numbers api-line-numbers-style)
+  (if (eq api-line-numbers-style 'relative)
+        (linum-relative-mode)
+      (linum-mode))))
 
-;; (defun api|enable-line-numbers (&optional arg)
-;;   "Enables the display of line numbers, using `display-line-numbers' (in Emacs
-;; 26+) or `nlinum-mode'.
-;; See `api-line-numbers-style' to control the style of line numbers to display."
-;;   (cond ((boundp 'display-line-numbers)
-;;          (setq display-line-numbers
-;;                (pcase arg
-;;                  (+1 api-line-numbers-style)
-;;                  (-1 nil)
-;;                  (_ api-line-numbers-style))))
-;;         ((eq api-line-numbers-style 'relative)
-;;          (if (= arg -1)
-;;              (nlinum-relative-off)
-;;            (nlinum-relative-on)))
-;;         ((not (null api-line-numbers-style))
-;;          (nlinum-mode (or arg +1)))))
+(defun api|disable-line-numbers ()
+  (interactive)
+  (when (boundp 'display-line-numbers)
+    (setq display-line-numbers nil))
+  (linum-mode 0))
 
-;; (defun api|disable-line-numbers ()
-;;   "Disable the display of line numbers."
-;;   (api|enable-line-numbers -1))
+(use-package linum-relative
+  :unless (boundp 'display-line-numbers)
+  :diminish linum-relative-mode
+  :commands linum-relative-mode
+  :init
+  (linum-mode 0)
+  (setq linum-format "%4d"
+        linum-relative-current-symbol ""))
 
-;; (dolist (hook '(prog-mode-hook text-mode-hook conf-mode-hook))
-;;   (add-hook hook #'api|enable-line-numbers))
-
-;; (use-package nlinum
-;;   :unless (boundp 'display-line-numbers)
-;;   :commands nlinum-mode
-;;   :init
-;;   (defvar api-line-number-lpad 4
-;;     "How much padding to place before line numbers.")
-;;   (defvar api-line-number-rpad 1
-;;     "How much padding to place after line numbers.")
-;;   (defvar api-line-number-pad-char 32
-;;     "Character to use for padding line numbers.
-;; By default, this is a space character. If you use `whitespace-mode' with
-;; `space-mark', the whitespace in line numbers will be affected (this can look
-;; ugly). In this case, you can change this to ?\u2002, which is a unicode
-;; character that looks like a space that `whitespace-mode' won't affect.")
-;;   :config
-;;   (setq nlinum-highlight-current-line t)
-
-;;   ;; Fix lingering hl-line overlays (caused by nlinum)
-;;   (add-hook 'hl-line-mode-hook
-;;     (remove-overlays (point-min) (point-max) 'face 'hl-line))
-
-;;   (defun api-nlinum-format-fn (line _width)
-;;     "A more customizable `nlinum-format-function'. See `doom-line-number-lpad',
-;; `doom-line-number-rpad' and `doom-line-number-pad-char'. Allows a fix for
-;; `whitespace-mode' space-marks appearing inside the line number."
-;;     (let ((str (number-to-string line)))
-;;       (setq str (concat (make-string (max 0 (- api-line-number-lpad (length str)))
-;;                                      api-line-number-pad-char)
-;;                         str
-;;                         (make-string api-line-number-rpad api-line-number-pad-char)))
-;;       (put-text-property 0 (length str) 'face
-;;                          (if (and nlinum-highlight-current-line
-;;                                   (= line nlinum--current-line))
-;;                              'nlinum-current-line
-;;                            'linum)
-;;                          str)
-;;       str))
-;;   (setq nlinum-format-function #'api-nlinum-format-fn)
-
-;;   (defun api|init-nlinum-width ()
-;;     "Calculate line number column width beforehand (optimization)."
-;;     (setq nlinum--width
-;;           (length (save-excursion (goto-char (point-max))
-;;                                   (format-mode-line "%l")))))
-;;   (add-hook 'nlinum-mode-hook #'api|init-nlinum-width))
-
-;; ;Fixes disappearing line numbers in nlinum and other quirks
-;; (use-package nlinum-hl
-;;   :unless (boundp 'display-line-numbers)
-;;   :after nlinum
-;;   :config
-;;   ;; With `markdown-fontify-code-blocks-natively' enabled in `markdown-mode',
-;;   ;; line numbers tend to vanish next to code blocks.
-;;   (advice-add #'markdown-fontify-code-block-natively
-;;               :after #'nlinum-hl-do-markdown-fontify-region)
-;;   ;; When using `web-mode's code-folding an entire range of line numbers will
-;;   ;; vanish in the affected area.
-;;   (advice-add #'web-mode-fold-or-unfold :after #'nlinum-hl-do-generic-flush)
-;;   ;; Changing fonts can leave nlinum line numbers in their original size; this
-;;   ;; forces them to resize.
-;;   (advice-add #'set-frame-font :after #'nlinum-hl-flush-all-windows))
-
-;; (use-package nlinum-relative
-;;   :unless (boundp 'display-line-numbers)
-;;   :commands nlinum-relative-mode
-;;   :after evil
-;;   :config (nlinum-relative-setup-evil))
-
-;;(use-package visual-line-mode
-;;   :ensure nil
-;;   :diminish visual-line-mode
-;;   :config (global-visual-line-mode 1))
+(add-hook 'prog-mode-hook #'api|enable-line-numbers)
+(add-hook 'text-mode-hook #'api|enable-line-numbers)
+(add-hook 'org-mode-hook #'api|disable-line-numbers)
 
 ;; show fill column
 (use-package fill-column-indicator
