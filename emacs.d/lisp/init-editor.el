@@ -21,7 +21,15 @@
               size-indication-mode t
               line-number-mode t
               column-number-mode t
-              delete-selection-mode t)
+              delete-selection-mode t
+
+              whitespace-line-column 80
+              whitespace-style '(face lines-tail))
+
+;; Enable whitespace mode for some modes.
+(dolist (hook '(prog-mode-hook
+                latex-mode-hook))
+  (add-hook hook 'whitespace-mode))
 
 ;; Show matching paranthesis.
 (setq show-paren-delay 0.1
@@ -30,8 +38,9 @@
 (add-hook 'after-init-hook #'show-paren-mode)
 
 ;; turn on auto-fill mode
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'latex-mode-hook 'turn-on-auto-fill)
+(dolist (hook '(text-mode-hook
+                latex-mode-hook))
+  (add-hook hook 'turn-on-auto-fill))
 
 ;; Highlight the current line.
 (use-package hl-line
@@ -72,7 +81,9 @@
 
 ;; Highlight indentations
 (use-package highlight-indent-guides
-  :commands (highlight-indentation-mode highlight-indentation-current-column-mode))
+  :commands (highlight-indentation-mode
+             highlight-indentation-current-column-mode)
+  :init (setq highlight-indent-guides-method 'character))
 
 ;; visualize for better undo
 (use-package undo-tree
@@ -136,19 +147,91 @@ t           Ordinary line numbers
   (setq linum-format "%4d"
         linum-relative-current-symbol ""))
 
-(add-hook 'prog-mode-hook #'api|enable-line-numbers)
-(add-hook 'text-mode-hook #'api|enable-line-numbers)
-(add-hook 'org-mode-hook #'api|disable-line-numbers)
+(dolist (hook '(prog-mode-hook
+                text-mode-hook))
+  (add-hook hook #'api|enable-line-numbers))
 
 ;; show fill column
-(use-package fill-column-indicator
-  :diminish (fci-mode . " ⓕ")
-  :defer t
+;; (use-package fill-column-indicator
+;;   :diminish (fci-mode . " ⓕ")
+;;   :defer t
+;;   :init
+;;   (dolist (hooks '(prog-mode-hook
+;;                    text-mode-hook
+;;                    latex-mode-hook))
+;;     (add-hook hooks (lambda () (fci-mode 1)))))
+
+;; Expand selection region by semantic units.
+(use-package expand-region
+  :commands (er/expand-region er/contract-region er/mark-symbol er/mark-word))
+
+;; Multiple cursors.
+(use-package evil-multiedit
+  :commands (evil-multiedit-match-all
+             evil-multiedit-match-and-next
+             evil-multiedit-match-and-prev
+             evil-multiedit-match-symbol-and-next
+             evil-multiedit-match-symbol-and-prev
+             evil-multiedit-toggle-marker-here
+             evil-multiedit-toggle-or-restrict-region
+             evil-multiedit-next
+             evil-multiedit-prev
+             evil-multiedit-restore
+             evil-multiedit-abort
+             evil-multiedit-ex-match))
+
+(use-package evil-mc
+  :after hydra
+  :commands (evil-mc-make-all-cursors
+             evil-mc-undo-all-cursors
+             evil-mc-pause-cursors
+             evil-mc-resume-cursors
+             evil-mc-make-and-goto-first-cursor
+             evil-mc-make-and-goto-last-cursor
+             evil-mc-make-cursor-here
+             evil-mc-make-cursor-move-next-line
+             evil-mc-make-cursor-move-prev-line
+             evil-mc-make-and-goto-next-cursor
+             evil-mc-skip-and-goto-next-cursor
+             evil-mc-make-and-goto-prev-cursor
+             evil-mc-skip-and-goto-prev-cursor
+             evil-mc-make-and-goto-next-match
+             evil-mc-skip-and-goto-next-match
+             evil-mc-make-and-goto-prev-match
+             evil-mc-skip-and-goto-prev-match)
   :init
-  (dolist (hooks '(prog-mode-hook
-                   text-mode-hook
-                   latex-mode-hook))
-    (add-hook hooks (lambda () (fci-mode 1)))))
+  ;(defvar evil-mc-key-map (make-sparse-keymap))
+  ;; remove emc prefix when there is not multiple cursors
+  (setq evil-mc-undo-cursors-on-keyboard-quit t
+        evil-mc-mode-line
+        `(:eval (when (> (evil-mc-get-cursor-count) 1)
+                  (format ,(propertize " %s:%d" 'face 'cursor)
+                          evil-mc-mode-line-prefix
+                          (evil-mc-get-cursor-count)))))
+  :config
+  (global-evil-mc-mode 1)
+
+  (defun api|escape-multiple-cursors ()
+    "Clear evil-mc cursors and restore state."
+    (when (evil-mc-has-cursors-p)
+      (evil-mc-undo-all-cursors)
+      (evil-mc-resume-cursors)
+      t))
+  (advice-add #'evil-force-normal-state :after #'api|escape-multiple-cursors)
+
+  (defhydra api@multiple-cursors (:hint nil)
+   "
+      ^Up^            ^Down^        ^Miscellaneous^
+ ----------------------------------------------
+ [_p_]   Next    [_n_]   Next    [_a_] Match all 
+ [_P_]   Skip    [_N_]   Skip    [_q_] Quit
+"
+   ("a" evil-mc-make-all-cursors)
+   ("n" evil-mc-make-and-goto-next-match)
+   ("N" evil-mc-skip-and-goto-next-match)
+   ("p" evil-mc-make-and-goto-prev-match)
+   ("P" evil-mc-skip-and-goto-prev-match)
+   ("q" nil)))
 
 (provide 'init-editor)
 ;;; init-editor.el ends here

@@ -8,6 +8,7 @@ hyper = {"cmd", "alt", "ctrl", "shift"}
 -- -----------------------------------------------------------------------------
 local caffeinate = require "hs.caffeinate"
 
+-- Lockscreen
 hotkey.bind({"cmd", "shift"}, "l", function()
   caffeinate.lockScreen()
 end)
@@ -44,84 +45,15 @@ end)
 -- -----------------------------------------------------------------------------
 -- Window Management 
 -- -----------------------------------------------------------------------------
-hs.window.animationDuration = 0
-
-local window = require "hs.window"
-local grid = require "hs.grid"
-
-grid.MARGINX = 0
-grid.MARGINY = 0
-local gw = grid.GRIDWIDTH
-local gh = grid.GRIDHEIGHT
-
-local setCellForWindow = function(cell)
-    return function()
-        local win = window.focusedWindow()
-        if win then
-            grid.set(win, cell)
-        else
-            alert.show("Please select a window!")
-        end
-    end 
-end
-
-positionWindow = function(x, y, w, h)
-    return function()
-        local win = hs.window.focusedWindow()
-        local screen = win:screen()
-        local f = win:frame()
-        local max = screen:frame()
-    
-        f.x = max.w * x
-        f.y = max.h * y
-        f.w = max.w * w
-        f.h = max.h * h
-        win:setFrame(f)
-    end
-end
-
-moveWindow = function(x, y)
-    return function()
-        local win = hs.window.focusedWindow()
-        local f = win:frame()
-        f.x = f.x + x
-        f.y = f.y + y
-        win:setFrame(f)
-    end
-end
-
-local leftHalf = {x=0,y=0,w=gw/2,h=gh}
-local rightHalf = {x=gw/2,y=0,w=gw/2,h=gh}
-local topHalf = {x=0,y=0,w=gw,h=gw/2}
-local bottomHalf = {x=0,y=gh/2,w=gw,h=gw/2}
-local topLeft = {x=0,y=0,w=gw/2,h=gh/2}
-local topRight = {x=gw/2,y=0,w=gw/2,h=gh/2}
-local bottomLeft = {x=0,y=gh/2,w=gw/2,h=gh/2}
-local bottomRight = {x=gw/2,y=gh/2,w=gw/2,h=gh/2}
-
-keysWindowFunctions = {
-    --{'f', grid.maximizeWindow},
-    {'h', setCellForWindow(leftHalf)},
-    {'l', setCellForWindow(rightHalf)},
-    {'j', setCellForWindow(bottomHalf)},
-    {'k', setCellForWindow(topHalf)},
-    {'left', moveWindow(-10,0)},        -- Hyper+left Move window left
-    {'right', moveWindow(10,0)},        -- Hyper+right Move window right
-    {'up', moveWindow(0,-10)},          -- Hyper+up Move window up
-    {'down', moveWindow(0,10)},         -- Hyper+down Move window down
-    {'1', setCellForWindow(topLeft)},
-    {'2', setCellForWindow(topRight)},
-    {'3', setCellForWindow(bottomLeft)},
-    {'4', setCellForWindow(bottomRight)}
-}
-
-for i,kv in ipairs(keysWindowFunctions) do
---    k:bind({}, kv[1], function() kv[2](); k.triggered=true; end)
-   hs.hotkey.bind(hyper, kv[1], function() kv[2](); end) 
-end
-
-switcher = hs.window.switcher.new() 
-hotkey.bind(hyper,'tab',nil,function()switcher:next()end,nil,function()switcher:next()end)
+hs.loadSpoon("MiroWindowsManager")
+hs.window.animationDuration = 0.1
+spoon.MiroWindowsManager:bindHotkeys({
+  up = {hyper, "up"},
+  right = {hyper, "right"},
+  down = {hyper, "down"},
+  left = {hyper, "left"},
+  fullscreen = {hyper, "F"}
+})
 
 -- -----------------------------------------------------------------------------
 -- Window Management with ChunkWM
@@ -141,31 +73,35 @@ end
 -- -----------------------------------------------------------------------------
 local application = require "hs.application"
 
-a = hotkey.modal.new({}, "F16")
-
-launch = function(appName)
-    local app = application.get(appName) 
-    if not app then 
-        alert.show(appName .. " is not active!") 
-        return 
-    end
-    application.launchOrFocus(app:name()) 
-    app:activate(true) 
-end
+myModal = hotkey.modal.new({}, "F16")
 
 keysApps = {
-    {'i', "iTerm2"},
-    {'s', "Safari"},
-    {'a', "Airmail"},
-    {'f', "Finder"},
-    {'e', "Emacs"}
+    {key = 'b', name = 'Firefox'},
+    {key = 'e', name = 'Emacs'},
+    {key = 'f', name = 'Finder'},
+    {key = 'i', name = 'iTerm'},
+    {key = 's', name = 'Safari'},
+    {key = 't', name = 'Terminal'},
 }
 
-for i, app in ipairs(keysApps) do
-  a:bind({}, app[1], function() launch(app[2]); a:exit(); end)
+for _, app in ipairs(keysApps) do
+  if app.id then
+    local located_name = hs.application.nameForBundleID(app.id)
+    if located_name then
+      myModal:bind('', app.key, located_name, function()
+          hs.application.launchOrFocusByBundleID(app.id)
+          myModal:exit()
+      end)
+    end
+  elseif app.name then
+      myModal:bind('', app.key, app.name, function()
+          hs.application.launchOrFocus(app.name)
+          myModal:exit()
+      end)
+  end
 end
 
-pressedA = function() a:enter() end
+pressedA = function() myModal:enter() end
 releasedA = function() end
 hotkey.bind(hyper, 'a', nil, pressedA, releasedA)
 

@@ -24,37 +24,20 @@
 
   (defhydra api@window-nav (:hint nil)
     "
-          Split: _v_ert  _s_:horz
-         Delete: _c_lose  _o_nly
-  Switch Window: _h_:left  _j_:down  _k_:up  _l_:right
-        Buffers: _p_revious  _n_ext  _b_:select  _f_ind-file
-         Resize: _H_:splitter left  _J_:splitter down  _K_:splitter up  _L_:splitter right
-           Move: _a_:up  _z_:down  _i_menu
+Move   : _h_: far left         _j_: very bottom      _k_:very top       _l_:far right      _s_: swap with other
+Resize : _+_: increase height  _-_: decrease height  _<_:decrease width _>_:increase width _=_: balance
 "
-    ("z" scroll-up-line)
-    ("a" scroll-down-line)
-    ("i" idomenu)
+    ("h" evil-window-move-far-left)
+    ("j" evil-window-move-very-bottom)
+    ("k" evil-window-move-very-top)
+    ("l" evil-window-move-far-right)
+    ("s" ace-swap-window)
 
-    ("h" windmove-left)
-    ("j" windmove-down)
-    ("k" windmove-up)
-    ("l" windmove-right)
-
-    ("p" previous-buffer)
-    ("n" next-buffer)
-    ("b" switch-to-buffer)
-    ("f" find-file)
-
-    ("s" split-window-below)
-    ("v" split-window-right)
-
-    ("c" delete-window)
-    ("o" delete-other-windows)
-
-    ("H" hydra-move-splitter-left)
-    ("J" hydra-move-splitter-down)
-    ("K" hydra-move-splitter-up)
-    ("L" hydra-move-splitter-right)
+    ("+" evil-window-increase-height)
+    ("-" evil-window-decrease-height)
+    ("<" evil-window-decrease-width)
+    (">" evil-window-increase-width)
+    ("=" balance-windows)
 
     ("q" nil)))
 
@@ -99,7 +82,7 @@
                       "h" '(:ignore t :which-key "hydras")
                       "ht" '(api@text-zoom/body :which-key "Text zoom")
                       "hw" '(api@window-nav/body :which-key "Window navigation")
-                      "hc" '(api/multiple-cursors-hydra/body :which-key "Multiple cursors")
+                      "hc" '(api@multiple-cursors/body :which-key "Multiple cursors")
 
 
                       "o" '(:ignore t :which-key "org-mode")
@@ -122,10 +105,13 @@
 
                       "t" '(:ignore t :which-key "toggle")
                       "tc" '(evilnc-comment-or-uncomment-lines :which-key "comments")
-                      "ti" 'highlight-indentation-mode
+                      "ti" 'highlight-indent-guides-mode
                       "tt" 'flyspell-mode
                       "ts" 'flycheck-mode
                       "th" 'highlight-symbol
+
+                      "v" #'er/expand-region
+                      "V" #'er/contract-region
 
                       "w" '(evil-window-map :which-key "window")
 

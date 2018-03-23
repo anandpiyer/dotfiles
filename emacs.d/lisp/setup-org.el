@@ -15,7 +15,7 @@
         ""
       (concat v-i "\n"))))
 
-(use-package org
+(use-package org-plus-contrib
   :defer t
   :bind ("C-c c" . org-capture)
   :init
@@ -24,6 +24,7 @@
         org-startup-with-inline-images t
         org-src-fontify-natively t
         org-imenu-depth 8
+        org-log-done t
         org-log-into-drawer t
         org-agenda-window-setup 'current-window
         org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
@@ -31,6 +32,7 @@
   (setq org-agenda-files
         (list (concat org-directory "organizer.org")
               (concat org-directory "beorg.org")
+              (concat org-directory "notes.org")
               (concat org-directory "papers/notes.org"))
         org-deadline-warning-days 7
         org-agenda-start-on-weekday nil
@@ -44,21 +46,36 @@
   (setq org-capture-templates
         (quote (("t" "Todo" entry
                  (file+headline org-default-notes-file "Inbox")
-                 "* TODO %^{Todo}\n:PROPERTIES:\n:CREATED: %U\n:END:\n%(v-i-or-nothing)"
+                 "* TODO %^{Todo}\n:PROPERTIES:\n:CREATED: %T\n:END:\n%(v-i-or-nothing)"
                  :empty-lines 1
                  :prepend t
-                 :immediate-finish t)
-                ("n" "Note" entry
-                 (file+headline org-default-notes-file "Notes")
-                 "* \n:PROPERTIES:\n:CREATED:%U\n:END:\n%?"
-                 )
+                 :immediate-finish t
+                 :kill-buffer t)
+                ("n" "Note" entry (file+headline org-default-notes-file "Notes")
+                 "* %U %?"
+                 :prepend t
+                 :empty-lines 1
+                 :kill-buffer t)
                 ("p" "Paper" entry
                  (file+headline org-default-notes-file "Papers")
-                 "* %^{Title} %(org-set-tags)\n:PROPERTIES:\n:Created: %U\n:Linked: %a\n:END:\n%i\nBrief description:\n%?"
+                 "* %^{Title} %(org-set-tags)\n:PROPERTIES:\n:CREATED: %U\n:Linked: %a\n:END:\n%i\nBrief description:\n%?"
                  :prepend t
                  :empty-lines 1
-                 :created t)
-                ))))
+                 :created t))))
+
+  ;; Add creation date as a property in all captures.
+  ;; (require 'org-expiry)
+  ;; (add-hook 'org-capture-before-finalize-hook
+  ;;        #'(lambda()
+  ;;              (save-excursion
+  ;;                   (org-back-to-heading)
+  ;;                   (org-expiry-insert-created))))
+
+  ;; Once inside the capture, change to insert state.
+  (add-hook 'org-capture-mode-hook #'evil-insert-state)
+
+  ;; No need to show line numbers in org mode.
+  (add-hook 'org-mode-hook #'api|disable-line-numbers))
 
 (use-package org-bullets
   :defer t

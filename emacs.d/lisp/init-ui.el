@@ -64,9 +64,10 @@
 (use-package ace-window
   :defer t
   :config
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
-        aw-scope 'frame
-        aw-background t))
+   (set-face-attribute 'aw-leading-char-face nil :foreground "deep sky blue" :weight 'bold :height 5.0)
+   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)
+         aw-scope 'frame
+         aw-background t))
 
 ;; Rainbow delimiters to manage delimiter explosion.
 (use-package rainbow-delimiters
