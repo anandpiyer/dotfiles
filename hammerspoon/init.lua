@@ -1,5 +1,6 @@
 local hotkey = require "hs.hotkey"
 local alert = require "hs.alert"
+hs.window.animationDuration = 0
 
 hyper = {"cmd", "alt", "ctrl", "shift"}
 
@@ -8,12 +9,16 @@ hyper = {"cmd", "alt", "ctrl", "shift"}
 -- -----------------------------------------------------------------------------
 local caffeinate = require "hs.caffeinate"
 
+--
 -- Lockscreen
-hotkey.bind({"cmd", "shift"}, "l", function()
-  caffeinate.lockScreen()
+--
+hotkey.bind(hyper, "L", "Lock", function()
+  caffeinate.lockscreen()
 end)
 
--- Caffeine functionality. Icon images from KeepingYouAwake.
+--
+-- caffeine functionality. icon images from keepingyouawake.
+--
 local caffeine = hs.menubar.new()
 local activeMessage = "Sleeping prohitited"
 local inactiveMessage = "Sleeping allowed"
@@ -46,12 +51,11 @@ end)
 -- Window Management 
 -- -----------------------------------------------------------------------------
 hs.loadSpoon("MiroWindowsManager")
-hs.window.animationDuration = 0.1
 spoon.MiroWindowsManager:bindHotkeys({
-  up = {hyper, "up"},
-  right = {hyper, "right"},
-  down = {hyper, "down"},
-  left = {hyper, "left"},
+  up = {hyper, "k"},
+  right = {hyper, "l"},
+  down = {hyper, "j"},
+  left = {hyper, "h"},
   fullscreen = {hyper, "F"}
 })
 
@@ -69,13 +73,41 @@ for i,kv in ipairs(keysWindowFunctions) do
 end
 
 -- -----------------------------------------------------------------------------
+-- Ace Window style window switching.
+-- -----------------------------------------------------------------------------
+hs.hints.hintChars = {'a','s','d','f','g','h','j','k','l'}
+hotkey.bind(hyper, 'tab', function()
+                hs.hints.windowHints()
+                end)
+
+-- -----------------------------------------------------------------------------
 -- Application Management
 -- -----------------------------------------------------------------------------
 local application = require "hs.application"
 
+--
+-- Quick launcher for most used apps bound to hyper + number.
+--
+keysQuickApps = {
+   {key = '1', name = 'Firefox'},
+   {key = '2', name = 'Mail'},
+   {key = '3', name = 'Emacs'},
+   {key = '4', name = 'iTerm'},
+}
+
+for _, app in ipairs(keysQuickApps) do
+   hotkey.bind(hyper, app.key, app.name, function()
+                  hs.application.launchOrFocus(app.name)
+   end)
+end
+
+--
+-- Modal bindings for other frequently used apps bound to [hyper + a] + key.
+--
 myModal = hotkey.modal.new({}, "F16")
 
 keysApps = {
+    {key = 'a', name = 'Airmail 3'},
     {key = 'b', name = 'Firefox'},
     {key = 'e', name = 'Emacs'},
     {key = 'f', name = 'Finder'},
@@ -85,20 +117,20 @@ keysApps = {
 }
 
 for _, app in ipairs(keysApps) do
-  if app.id then
-    local located_name = hs.application.nameForBundleID(app.id)
-    if located_name then
-      myModal:bind('', app.key, located_name, function()
-          hs.application.launchOrFocusByBundleID(app.id)
-          myModal:exit()
-      end)
-    end
-  elseif app.name then
+   if app.id then
+      local located_name = hs.application.nameForBundleID(app.id)
+      if located_name then
+         myModal:bind('', app.key, located_name, function()
+                         hs.application.launchOrFocusByBundleID(app.id)
+                         myModal:exit()
+         end)
+      end
+   elseif app.name then
       myModal:bind('', app.key, app.name, function()
-          hs.application.launchOrFocus(app.name)
-          myModal:exit()
+                      hs.application.launchOrFocus(app.name)
+                      myModal:exit()
       end)
-  end
+   end
 end
 
 pressedA = function() myModal:enter() end
@@ -119,6 +151,6 @@ function reloadConfig(files)
         hs.reload()
     end
 end
-local myWatcher = hs.pathwatcher.new("/Users/api/dotfiles/hammerspoon/", reloadConfig):start()
+local myWatcher = hs.pathwatcher.new("/Users/api/dotfiles/hammerspoon/",
+                                     reloadConfig):start()
 alert.show("Hammerspoon config loaded")
-
