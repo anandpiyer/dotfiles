@@ -5,7 +5,7 @@
 (defvar company-mode/enable-yas t "Enable yasnippet for all backends.")
 
 (use-package company
-  :diminish (company-mode . " ⓐ")
+  :diminish company-mode
   :commands (company-mode global-company-mode company-complete
              company-complete-common company-manual-begin company-grab-line)
   :config

@@ -73,8 +73,24 @@ for i,kv in ipairs(keysWindowFunctions) do
 end
 
 -- -----------------------------------------------------------------------------
--- Ace Window style window switching.
+-- Window switching.
 -- -----------------------------------------------------------------------------
+--
+-- cmd-tab replacement using alt-tab. Not useful in most cases.
+--
+switcher = hs.window.switcher.new(hs.window.filter.new():setDefaultFilter{})
+switcher.ui.highlightColor = {0.4,0.4,0.5,0.8}
+switcher.ui.thumbnailSize = 128
+switcher.ui.selectedThumbnailSize = 284
+switcher.ui.backgroundColor = {0.3, 0.3, 0.3, 0.5}
+switcher.ui.fontName = 'System'
+switcher.ui.showSelectedTitle = false
+hs.hotkey.bind("alt", "tab", function()switcher:next()end)
+hs.hotkey.bind("alt-shift", "tab", function()switcher:previous()end)
+
+--
+-- ace-window style focused-window switcher in a given desktop with hyper-tab.
+--
 hs.hints.hintChars = {'a','s','d','f','g','h','j','k','l'}
 hotkey.bind(hyper, 'tab', function()
                 hs.hints.windowHints()
@@ -112,6 +128,7 @@ keysApps = {
     {key = 'e', name = 'Emacs'},
     {key = 'f', name = 'Finder'},
     {key = 'i', name = 'iTerm'},
+    {key = 'p', name = 'Skim'},
     {key = 's', name = 'Safari'},
     {key = 't', name = 'Terminal'},
 }
@@ -133,9 +150,9 @@ for _, app in ipairs(keysApps) do
    end
 end
 
-pressedA = function() myModal:enter() end
-releasedA = function() end
-hotkey.bind(hyper, 'a', nil, pressedA, releasedA)
+pressedModal = function() myModal:enter() end
+releasedModal = function() end
+hotkey.bind(hyper, 'a', nil, pressedModal, releasedModal)
 
 -- -----------------------------------------------------------------------------
 -- Reload config automatically upon change.

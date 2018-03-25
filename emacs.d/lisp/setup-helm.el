@@ -10,7 +10,7 @@
   "The helm text prompt prefix string is globally replaced with this string.")
 
 (use-package helm
-  :diminish helm-mode
+  :diminish helm
   :ensure helm-projectile
   :init
   (setq helm-quick-update t

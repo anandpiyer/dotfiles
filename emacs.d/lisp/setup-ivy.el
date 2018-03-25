@@ -7,6 +7,7 @@
 ;;; Code:
 
 (use-package ivy
+  :diminish ivy-mode
   :init
   (add-hook 'emacs-startup-hook #'ivy-mode)
   :config

@@ -61,14 +61,16 @@ Resize : _+_: increase height  _-_: decrease height  _<_:decrease width _>_:incr
                       "bh" 'previous-buffer
                       "bl" 'next-buffer
 
-                      "c" '(:ignore t :which-key "window configuration")
-                      "ch" 'eyebrowse-prev-window-config
-                      "cp" 'eyebrowse-prev-window-config
-                      "cl" 'eyebrowse-next-window-config
-                      "cn" 'eyebrowse-next-window-config
-                      "cc" 'eyebrowse-close-window-config
-                      "cr" 'eyebrowse-rename-window-config
-                      "cd" 'eyebrowse--delete-window-config
+                      "l" '(:ignore t :which-key "window layout")
+                      "lp" 'eyebrowse-prev-window-config
+                      "ln" 'eyebrowse-next-window-config
+                      "lc" 'eyebrowse-close-window-config
+                      "lr" 'eyebrowse-rename-window-config
+                      "ld" 'eyebrowse--delete-window-config
+                      "ll" 'eyebrowse-last-window-config
+                      "l1" 'eyebrowse-switch-to-window-config-1
+                      "l2" 'eyebrowse-switch-to-window-config-2
+                      "l3" 'eyebrowse-switch-to-window-config-3
 
                       "f" '(:ignore t :which-key "file")
                       "ff" 'helm-find-files
@@ -83,7 +85,6 @@ Resize : _+_: increase height  _-_: decrease height  _<_:decrease width _>_:incr
                       "ht" '(api@text-zoom/body :which-key "Text zoom")
                       "hw" '(api@window-nav/body :which-key "Window navigation")
                       "hc" '(api@multiple-cursors/body :which-key "Multiple cursors")
-
 
                       "o" '(:ignore t :which-key "org-mode")
                       "oa" 'org-agenda
