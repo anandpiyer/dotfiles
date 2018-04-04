@@ -1,3 +1,4 @@
+# DEPRECATED. See https://github.com/anandpiyer/.dotfiles/blob/master/.dotfiles/README.md
 # dotfiles
 
 ## Karabiner-Elements
